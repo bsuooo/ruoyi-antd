@@ -5,10 +5,10 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 export {}
 
-declare module 'vue' {
-  export interface GlobalComponents {
-    AButton: (typeof import("ant-design-vue/es"))["Button"]
-    RouterLink: typeof import('vue-router')['RouterLink']
-    RouterView: typeof import('vue-router')['RouterView']
-  }
+declare module "vue" {
+	export interface GlobalComponents {
+		AButton: (typeof import("ant-design-vue/es"))["Button"]
+		RouterLink: (typeof import("vue-router"))["RouterLink"]
+		RouterView: (typeof import("vue-router"))["RouterView"]
+	}
 }
