@@ -5,9 +5,9 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 export {}
 
-declare module 'vue' {
-  export interface GlobalComponents {
-    AButton: typeof import('ant-design-vue/es')['Button']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-  }
+declare module "vue" {
+	export interface GlobalComponents {
+		AButton: (typeof import("ant-design-vue/es"))["Button"]
+		HelloWorld: (typeof import("./src/components/HelloWorld.vue"))["default"]
+	}
 }
