@@ -6,9 +6,16 @@
 export {}
 
 declare module 'vue' {
-	export interface GlobalComponents {
-		AButton: (typeof import('ant-design-vue/es'))['Button']
-		RouterLink: (typeof import('vue-router'))['RouterLink']
-		RouterView: (typeof import('vue-router'))['RouterView']
-	}
+  export interface GlobalComponents {
+    ACol: typeof import('ant-design-vue/es')['Col']
+    AForm: typeof import('ant-design-vue/es')['Form']
+    AFormItem: typeof import('ant-design-vue/es')['FormItem']
+    AInput: typeof import('ant-design-vue/es')['Input']
+    ARow: typeof import('ant-design-vue/es')['Row']
+    Form: typeof import('./src/components/atom/form/index.vue')['default']
+    FormItem: typeof import('./src/components/atom/form/components/formItem.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
+    Table: typeof import('./src/components/atom/table/index.vue')['default']
+  }
 }
