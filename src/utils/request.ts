@@ -1,17 +1,17 @@
-import axios, { InternalAxiosRequestConfig, AxiosResponse } from "axios"
-import { getToken } from "@/utils/system"
+import axios, { InternalAxiosRequestConfig, AxiosResponse } from 'axios'
+import { getToken } from '@/utils/system'
 
 const service = axios.create({
 	baseURL: process.env.VUE_APP_BASE_API,
 	timeout: 60000,
-	headers: { "Content-Type": "application/json;charset=utf-8" }
+	headers: { 'Content-Type': 'application/json;charset=utf-8' }
 })
 
 service.interceptors.request.use(
 	(config: InternalAxiosRequestConfig) => {
 		const token = getToken()
 		if (token) {
-			config.headers.Authorization = "Bear" + token
+			config.headers.Authorization = 'Bear' + token
 		}
 		return config
 	},
