@@ -1,7 +1,10 @@
 <template>
-	<div class="w-full h-screen bg-white">
-		<div></div>
-	</div>
+	<h1 class="name">{{ name }}</h1>
 </template>
 
-<script setup lang="ts" name="login"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+const name = ref('hello world!')
+</script>
+
+<style scoped></style>

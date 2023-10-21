@@ -21,6 +21,9 @@ export default defineConfig(({ mode }: ConfigEnv) => {
 				]
 			})
 		],
+		test: {
+			environment: 'jsdom'
+		},
 		resolve: {
 			alias: {
 				'@': '/src'
@@ -28,7 +31,7 @@ export default defineConfig(({ mode }: ConfigEnv) => {
 		},
 		server: {
 			host: true, // 0.0.0.0 或 true 开启所有
-			port: Number(env.VITE_APP_PORT),
+			port: Number(env.VITE_APP_PORT), // 为什么是string呢 ?
 			open: true, // 运行后是否打开浏览器
 			proxy: {
 				[env.VITE_API_BASE_URL]: {
