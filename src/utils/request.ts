@@ -5,7 +5,7 @@ import errorCode from '@/utils/ruoyi/errorCode'
 import { message } from 'ant-design-vue'
 
 const service = axios.create({
-	baseURL: process.env.VUE_APP_BASE_API,
+	baseURL: import.meta.env.VITE_APP_BASE_API,
 	timeout: 60000,
 	headers: { 'Content-Type': 'application/json;charset=utf-8' }
 })
