@@ -34,11 +34,10 @@ export default defineConfig(({ mode }: ConfigEnv) => {
 			port: Number(env.VITE_APP_PORT), // 为什么是string呢 ?
 			open: true, // 运行后是否打开浏览器
 			proxy: {
-				[env.VITE_API_BASE_URL]: {
-					target: 'http://vue.ruoyi.vip/prod-api/',
+				'/dev-api': {
+					target: 'http://vue.ruoyi.vip/prod-api',
 					changeOrigin: true,
-					rewrite: (path) =>
-						path.replace(new RegExp(`^${env.VITE_API_BASE_URL}`), '')
+					rewrite: (path) => path.replace(/^\/dev-api/, '')
 				}
 			}
 		}
