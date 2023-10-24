@@ -6,6 +6,7 @@
 		:label-col="labelCol"
 		:wrapper-col="wrapperCol"
 		:autocomplete="autocomplete"
+		v-bind="$attrs"
 	>
 		<a-row>
 			<slot />
