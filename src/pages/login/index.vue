@@ -58,7 +58,7 @@ import { ref, onMounted } from 'vue'
 import { getCaptchaImage } from '@/pages/login/api/index'
 import { LoginForm } from '@/pages/login/types/index'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/store/index'
+import { useUserStore } from '@/store/user'
 
 const form = ref<LoginForm>({
 	username: '',

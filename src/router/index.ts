@@ -1,6 +1,7 @@
 import * as VueRouter from 'vue-router'
 import login from '@/pages/login/index.vue'
 import home from '@/pages/home/index.vue'
+import NProcess from 'nprogress'
 
 const routes = [
 	{
@@ -21,9 +22,14 @@ export const router = VueRouter.createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+	NProcess.start()
 	if (to.name !== 'login') {
 		next()
 	} else {
 		next()
 	}
+})
+
+router.afterEach(() => {
+	NProcess.done()
 })

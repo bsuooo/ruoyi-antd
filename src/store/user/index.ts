@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { User, LoginForm } from '@/pages/login/types/index'
 import { login as loginApi } from '@/pages/login/api/index'
 import { message } from 'ant-design-vue'
+import { setToken } from '@/utils/system'
 
 export const useUserStore = defineStore('user', () => {
 	const userInfo = ref<User>()
@@ -13,7 +14,7 @@ export const useUserStore = defineStore('user', () => {
 			loginApi(loginForm)
 				.then((res) => {
 					token.value = res.token
-					sessionStorage.setItem('token', res.token)
+					setToken(res.token)
 					message.success('登录成功')
 					resolve(res)
 				})
