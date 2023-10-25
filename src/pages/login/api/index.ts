@@ -1,5 +1,9 @@
 import service from '@/utils/request'
-import { LoginForm, User, Roles } from '@/pages/login/types/index'
+import {
+	LoginForm,
+	GetInfoResult,
+	GetRoutersResult
+} from '@/pages/login/types/index'
 
 type CaptchaImageType = {
 	uuid: string
@@ -19,12 +23,9 @@ export const login = (data: LoginForm) => {
 }
 
 export const getInfo = () => {
-	return service.get<
-		unknown,
-		{ permissions: Permissions; roles: Roles; user: User }
-	>('/getInfo')
+	return service.get<unknown, GetInfoResult>('/getInfo')
 }
 
 export const getRouters = () => {
-	return service.get('/getRouters')
+	return service.get<unknown, GetRoutersResult>('/getRouters')
 }
