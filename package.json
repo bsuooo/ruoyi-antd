@@ -18,7 +18,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,vue}": [
-      "npm run lint && npm run prettierrc",
+      "npm run prettierrc && npm run lint",
       "git add"
     ]
   },
