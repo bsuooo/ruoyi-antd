@@ -11,17 +11,6 @@
 		"prepare": "husky install",
 		"test": "vitest"
 	},
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,vue}": [
-      "npm run prettierrc && npm run lint",
-      "git add"
-    ]
-  },
 	"dependencies": {
 		"@types/js-cookie": "^3.0.5",
 		"@vueuse/core": "^10.5.0",
