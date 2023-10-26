@@ -20,3 +20,27 @@ export type User = {
 	userId: number
 	userName: string
 }
+export type RouteMeta = {
+	icon?: string
+	link?: string
+	noCache: boolean
+	title: string
+}
+export type Route = {
+	alwaysShow?: boolean
+	component: string
+	hidden: boolean
+	name: string
+	path: string
+	redirect?: string
+	meta: RouteMeta
+	children?: Route[]
+}
+
+export type GetInfoResult = {
+	permissions: Permissions
+	roles: Roles
+	user: User
+}
+
+export type GetRoutersResult = Route[]

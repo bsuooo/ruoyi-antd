@@ -13,7 +13,9 @@ const service = axios.create({
 service.interceptors.request.use(
 	(config: InternalAxiosRequestConfig) => {
 		// 是否需要设置 token
-		const isToken = (config.headers || {}).isToken === false
+		// const isToken = (config.headers || {}).isToken === true
+		const isToken = true
+
 		if (isToken) {
 			const token = getToken()
 			if (token) {

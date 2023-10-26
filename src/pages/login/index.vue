@@ -59,6 +59,10 @@ import { getCaptchaImage } from '@/pages/login/api/index'
 import { LoginForm } from '@/pages/login/types/index'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store/user'
+import { login } from '@/pages/login/api/index'
+import { message } from 'ant-design-vue'
+import { setToken } from '@/utils/system'
+import { storeToRefs } from 'pinia'
 
 const form = ref<LoginForm>({
 	username: '',
@@ -80,13 +84,16 @@ const getCaptcha = async () => {
 const loading = ref(false)
 const formRef = ref()
 
-const userStore = useUserStore()
+const { token } = storeToRefs(useUserStore())
 const router = useRouter()
 const handleLogin = async () => {
 	await formRef.value.validate()
 	loading.value = true
 	try {
-		await userStore.login(form.value)
+		const res = await login(form.value)
+		token.value = res.token
+		setToken(res.token)
+		message.success('登录成功')
 		router.push('/home')
 	} catch (error) {
 		getCaptcha()

@@ -1,32 +1,23 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { User, LoginForm } from '@/pages/login/types/index'
-import { login as loginApi } from '@/pages/login/api/index'
-import { message } from 'ant-design-vue'
-import { setToken } from '@/utils/system'
+import { User, Route } from '@/pages/login/types/index'
 
 export const useUserStore = defineStore('user', () => {
 	const userInfo = ref<User>()
 	const token = ref<string>()
+	const roles = ref<string[]>([])
+	const routes = ref<Route>()
+	const permissions = ref<string[]>([])
 
-	function login(loginForm: LoginForm) {
-		return new Promise((resolve, reject) => {
-			loginApi(loginForm)
-				.then((res) => {
-					token.value = res.token
-					setToken(res.token)
-					message.success('登录成功')
-					resolve(res)
-				})
-				.catch(() => {
-					reject()
-				})
-		})
+	function formatRoutes(r: Route) {
+		routes.value = r
 	}
 
 	return {
 		userInfo,
 		token,
-		login
+		roles,
+		permissions,
+		formatRoutes
 	}
 })
