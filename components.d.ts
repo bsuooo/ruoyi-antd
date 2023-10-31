@@ -21,8 +21,10 @@ declare module 'vue' {
 		ASubMenu: (typeof import('ant-design-vue/es'))['SubMenu']
 		Form: (typeof import('./src/components/atom/form/index.vue'))['default']
 		FormItem: (typeof import('./src/components/atom/form/components/formItem.vue'))['default']
+		Icon: (typeof import('./src/components/atom/icon/index.vue'))['default']
 		RouterLink: (typeof import('vue-router'))['RouterLink']
 		RouterView: (typeof import('vue-router'))['RouterView']
+		SvgIcon: (typeof import('./src/components/atom/svgIcon/index.vue'))['default']
 		Table: (typeof import('./src/components/atom/table/index.vue'))['default']
 	}
 }

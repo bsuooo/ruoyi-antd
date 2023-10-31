@@ -2,34 +2,22 @@
 	<div class="position-fixed left-0">
 		<div
 			key="logo"
-			class="h-50px flex flex-items-center flex-justify-center bg-#001529"
-			:style="`width: ${leftWidth}px ;`"
+			class="h-50px flex flex-items-center flex-justify-center bg-#001529 logo"
 		>
 			<img src="/src//assets//img//logo.png" alt="" width="32" height="32" />
 			<span v-if="!collapsed" class="color-white">若依管理系统</span>
 		</div>
 		<a-menu
 			id="dddddd"
-			:style="`width: ${leftWidth}px; height: 100vh`"
+			class="page-menu"
 			mode="inline"
 			:inline-collapsed="collapsed"
-			theme="dark"
+			:theme="menuTheme"
 		>
-			<a-sub-menu key="sub1">
-				<template #title>Navigation One</template>
-				<a-menu-item-group key="g1">
-					<template #title>Item 1</template>
-					<a-menu-item key="1">Option 1</a-menu-item>
-					<a-menu-item key="2">Option 2</a-menu-item>
-				</a-menu-item-group>
-				<a-menu-item-group key="g2" title="Item 2">
-					<a-menu-item key="3">Option 3</a-menu-item>
-					<a-menu-item key="4">Option 4</a-menu-item>
-				</a-menu-item-group>
-			</a-sub-menu>
+			<menuItem v-for="m of menu" :key="m.path" :menu="m" />
 		</a-menu>
 	</div>
-	<div class="position-relative" :style="`margin-left: ${leftWidth}px`">
+	<div class="position-relative right-container">
 		<div class="h-50px flex items-center justify-between">
 			<div class="navbar-left ml-10px">
 				<a-button @click="collapsed = !collapsed">
@@ -62,7 +50,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
 import {
 	MenuFoldOutlined,
 	MenuUnfoldOutlined,
@@ -72,11 +61,15 @@ import {
 	FullscreenOutlined,
 	FontSizeOutlined
 } from '@ant-design/icons-vue'
+import { useSystemStore } from '@/store/system/index'
+import { useMenuStore } from '@/store/menu'
+import menuItem from './components/menuItem.vue'
 
-const collapsed = ref(false)
+const { collapsed, menuTheme } = storeToRefs(useSystemStore())
+const { menu } = storeToRefs(useMenuStore())
 
 const leftWidth = computed(() => {
-	return collapsed.value ? 50 : 220
+	return collapsed.value ? '50px' : '220px'
 })
 
 const goGithub = () => {
@@ -97,5 +90,22 @@ const goDocument = () => {
 	border-radius: 50%;
 	position: relative;
 	margin-right: 2px;
+}
+
+.logo {
+	width: v-bind(leftWidth);
+	transition: all 0.5s;
+}
+
+.right-container {
+	margin-left: v-bind(leftWidth);
+	transition: all 0.5s;
+}
+
+.page-menu {
+	width: v-bind(leftWidth);
+	height: calc(100vh - 50px);
+	overflow-y: auto;
+	transition: all 0.5s;
 }
 </style>

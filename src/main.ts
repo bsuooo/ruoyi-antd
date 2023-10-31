@@ -4,6 +4,7 @@ import { router } from '@/router'
 import { createPinia } from 'pinia'
 import components from '@/components'
 import 'virtual:uno.css'
+import '@/assets/style/custom.css'
 
 const pinia = createPinia()
 

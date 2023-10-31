@@ -43,4 +43,10 @@ export type GetInfoResult = {
 	user: User
 }
 
-export type GetRoutersResult = Route[]
+export type RequestResponse<T> = {
+	code: number
+	data: T
+	msg: string
+}
+
+export type GetRoutersResult = RequestResponse<Route[]>
