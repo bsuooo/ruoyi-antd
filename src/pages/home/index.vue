@@ -1,22 +1,5 @@
 <template>
-	<div class="position-fixed left-0">
-		<div
-			key="logo"
-			class="h-50px flex flex-items-center flex-justify-center bg-#001529 logo"
-		>
-			<img src="/src//assets//img//logo.png" alt="" width="32" height="32" />
-			<span v-if="!collapsed" class="color-white">若依管理系统</span>
-		</div>
-		<a-menu
-			id="dddddd"
-			class="page-menu"
-			mode="inline"
-			:inline-collapsed="collapsed"
-			:theme="menuTheme"
-		>
-			<menuItem v-for="m of menu" :key="m.path" :menu="m" />
-		</a-menu>
-	</div>
+	<pageMenu />
 	<div class="position-relative right-container">
 		<div class="h-50px flex items-center justify-between">
 			<div class="navbar-left ml-10px">
@@ -26,32 +9,41 @@
 				</a-button>
 			</div>
 			<div class="navbar-right">
-				<SearchOutlined class="ml-8px font-size-22px cursor-pointer" />
+				<SearchOutlined class="ml-12px font-size-22px cursor-pointer" />
 				<GithubOutlined
-					class="ml-8px font-size-22px cursor-pointer"
+					class="ml-12px font-size-22px cursor-pointer"
 					@click="goGithub"
 				/>
 				<QuestionCircleOutlined
-					class="ml-8px font-size-22px cursor-pointer"
+					class="ml-12px font-size-22px cursor-pointer"
 					@click="goDocument"
 				/>
-				<FullscreenOutlined class="ml-8px font-size-22px cursor-pointer" />
-				<FontSizeOutlined class="ml-8px font-size-22px cursor-pointer" />
+				<FullscreenOutlined class="ml-12px font-size-22px cursor-pointer" />
+				<FontSizeOutlined class="ml-12px font-size-22px cursor-pointer" />
+				<a-dropdown>
+					<a class="ant-dropdown-link" @click.prevent>
+						头像！
+						<DownOutlined />
+					</a>
+					<template #overlay>
+						<a-menu>
+							<a-menu-item>
+								<a href="javascript:;">系统设置</a>
+							</a-menu-item>
+							<a-menu-item>
+								<a href="javascript:;" @click="logout">退出登录</a>
+							</a-menu-item>
+						</a-menu>
+					</template>
+				</a-dropdown>
 			</div>
 		</div>
-		<div class="h-30px mt-4px mb-4px">
-			<span
-				class="color-white font-size-12px bg-blue p-4px ml-10px tab-list tab-list-active"
-				>首页</span
-			>
-		</div>
+		<tagList />
 		<div class="main"></div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { storeToRefs } from 'pinia'
 import {
 	MenuFoldOutlined,
 	MenuUnfoldOutlined,
@@ -59,14 +51,20 @@ import {
 	GithubOutlined,
 	QuestionCircleOutlined,
 	FullscreenOutlined,
-	FontSizeOutlined
+	FontSizeOutlined,
+	DownOutlined
 } from '@ant-design/icons-vue'
+import tagList from './components/tagList.vue'
+import pageMenu from './components/pageMenu.vue'
 import { useSystemStore } from '@/store/system/index'
-import { useMenuStore } from '@/store/menu'
-import menuItem from './components/menuItem.vue'
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { removeToken } from '@/utils/system'
+import { useUserStore } from '@/store/user'
+import { useRouter } from 'vue-router'
+import { message } from 'ant-design-vue'
 
-const { collapsed, menuTheme } = storeToRefs(useSystemStore())
-const { menu } = storeToRefs(useMenuStore())
+const { collapsed } = storeToRefs(useSystemStore())
 
 const leftWidth = computed(() => {
 	return collapsed.value ? '50px' : '220px'
@@ -79,33 +77,21 @@ const goGithub = () => {
 const goDocument = () => {
 	window.open('http://doc.ruoyi.vip/ruoyi-vue/')
 }
+
+const router = useRouter()
+const { userInfo, roles, permissions } = storeToRefs(useUserStore())
+const logout = () => {
+	router.push('/login')
+	removeToken()
+	userInfo.value = null
+	roles.value = []
+	permissions.value = []
+	message.success('已退出登录！')
+}
 </script>
 <style lang="less" scoped>
-.tab-list-active::before {
-	content: '';
-	background: #fff;
-	display: inline-block;
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	position: relative;
-	margin-right: 2px;
-}
-
-.logo {
-	width: v-bind(leftWidth);
-	transition: all 0.5s;
-}
-
 .right-container {
 	margin-left: v-bind(leftWidth);
-	transition: all 0.5s;
-}
-
-.page-menu {
-	width: v-bind(leftWidth);
-	height: calc(100vh - 50px);
-	overflow-y: auto;
 	transition: all 0.5s;
 }
 </style>

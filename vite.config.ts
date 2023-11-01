@@ -4,6 +4,8 @@ import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 import UnoCSS from 'unocss/vite'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv) => {
@@ -19,6 +21,12 @@ export default defineConfig(({ mode }: ConfigEnv) => {
 						importStyle: false
 					})
 				]
+			}),
+			createSvgIconsPlugin({
+				// 指定目录
+				iconDirs: [path.resolve(process.cwd(), 'src/assets/icon/svg')],
+				// 使用svg图标的格式
+				symbolId: 'icon-[dir]-[name]'
 			})
 		],
 		test: {

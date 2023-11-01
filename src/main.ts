@@ -5,6 +5,7 @@ import { createPinia } from 'pinia'
 import components from '@/components'
 import 'virtual:uno.css'
 import '@/assets/style/custom.css'
+import 'virtual:svg-icons-register'
 
 const pinia = createPinia()
 

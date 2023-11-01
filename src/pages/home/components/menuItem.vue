@@ -1,7 +1,7 @@
 <template>
 	<a-sub-menu v-if="menu.alwaysShow" :key="menu.path">
 		<template #icon>
-			<svgIcon />
+			<svgIcon :name="menu.meta.icon" />
 		</template>
 		<template #title>
 			<span :title="menu.meta.title">{{ menu.meta.title }}</span>
@@ -10,7 +10,7 @@
 	</a-sub-menu>
 	<a-menu-item :key="menu.path + ''" v-else>
 		<template #icon>
-			<svgIcon />
+			<svgIcon :name="menu.meta.icon" />
 		</template>
 		<span :title="menu.meta.title">{{ menu.meta.title }}</span>
 	</a-menu-item>
