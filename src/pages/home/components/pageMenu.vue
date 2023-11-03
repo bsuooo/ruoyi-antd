@@ -1,11 +1,12 @@
 <template>
 	<div class="position-fixed left-0">
 		<div
+			v-show="showRightLogo"
 			key="logo"
-			class="h-50px flex flex-items-center flex-justify-center bg-#001529 logo"
+			class="h-50px flex flex-items-center flex-justify-center logo"
 		>
 			<img src="/src/assets/img/logo.png" alt="" width="32" height="32" />
-			<span v-if="!collapsed" class="color-white">若依管理系统</span>
+			<span v-if="!collapsed">若依管理系统</span>
 		</div>
 		<a-menu
 			id="dddddd"
@@ -25,22 +26,29 @@ import { useMenuStore } from '@/store/menu'
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 
-const { collapsed, menuTheme } = storeToRefs(useSystemStore())
+const { collapsed, menuTheme, menuBgColor, MenuFtColor, showRightLogo } =
+	storeToRefs(useSystemStore())
 const { menu } = storeToRefs(useMenuStore())
 
 const leftWidth = computed(() => {
 	return collapsed.value ? '50px' : '220px'
 })
+
+const menuHeight = computed(() => {
+	return showRightLogo.value ? `calc(100vh - 50px)` : `100vh`
+})
 </script>
 <style lang="less" scoped>
 .page-menu {
 	width: v-bind(leftWidth);
-	height: calc(100vh - 50px);
+	height: v-bind(menuHeight);
 	overflow-y: auto;
 	transition: all 0.5s;
 }
 .logo {
 	width: v-bind(leftWidth);
 	transition: all 0.5s;
+	background-color: v-bind(menuBgColor);
+	color: v-bind(MenuFtColor);
 }
 </style>

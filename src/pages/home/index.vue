@@ -18,7 +18,16 @@
 					class="ml-12px font-size-22px cursor-pointer"
 					@click="goDocument"
 				/>
-				<FullscreenOutlined class="ml-12px font-size-22px cursor-pointer" />
+				<FullscreenOutlined
+					v-if="!isScreenfull"
+					class="ml-12px font-size-22px cursor-pointer"
+					@click="changeScreenfull"
+				/>
+				<FullscreenExitOutlined
+					v-else
+					class="ml-12px font-size-22px cursor-pointer"
+					@click="changeScreenfull"
+				/>
 				<FontSizeOutlined class="ml-12px font-size-22px cursor-pointer" />
 				<a-dropdown>
 					<a class="ant-dropdown-link" @click.prevent>
@@ -27,9 +36,7 @@
 					</a>
 					<template #overlay>
 						<a-menu>
-							<a-menu-item>
-								<a href="javascript:;">系统设置</a>
-							</a-menu-item>
+							<systemConfig />
 							<a-menu-item>
 								<a href="javascript:;" @click="logout">退出登录</a>
 							</a-menu-item>
@@ -38,7 +45,7 @@
 				</a-dropdown>
 			</div>
 		</div>
-		<tagList />
+		<tagList v-show="showTagsView" />
 		<div class="main"></div>
 	</div>
 </template>
@@ -52,7 +59,8 @@ import {
 	QuestionCircleOutlined,
 	FullscreenOutlined,
 	FontSizeOutlined,
-	DownOutlined
+	DownOutlined,
+	FullscreenExitOutlined
 } from '@ant-design/icons-vue'
 import tagList from './components/tagList.vue'
 import pageMenu from './components/pageMenu.vue'
@@ -63,8 +71,10 @@ import { removeToken } from '@/utils/system'
 import { useUserStore } from '@/store/user'
 import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
+import { useScreenFull } from '@/hooks/useScreenFull'
+import systemConfig from './components/systemConfig.vue'
 
-const { collapsed } = storeToRefs(useSystemStore())
+const { collapsed, showTagsView } = storeToRefs(useSystemStore())
 
 const leftWidth = computed(() => {
 	return collapsed.value ? '50px' : '220px'
@@ -77,6 +87,8 @@ const goGithub = () => {
 const goDocument = () => {
 	window.open('http://doc.ruoyi.vip/ruoyi-vue/')
 }
+
+const { changeScreenfull, isScreenfull } = useScreenFull()
 
 const router = useRouter()
 const { userInfo, roles, permissions } = storeToRefs(useUserStore())
