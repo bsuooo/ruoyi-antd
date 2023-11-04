@@ -1,7 +1,7 @@
 <template>
 	<a-sub-menu v-if="menu.alwaysShow" :key="menu.path">
 		<template #icon>
-			<svgIcon :name="menu.meta.icon" />
+			<svgIcon :name="menu.meta.icon" :color="MenuFtColor" />
 		</template>
 		<template #title>
 			<span :title="menu.meta.title">{{ menu.meta.title }}</span>
@@ -10,7 +10,7 @@
 	</a-sub-menu>
 	<a-menu-item :key="menu.path + ''" v-else>
 		<template #icon>
-			<svgIcon :name="menu.meta.icon" />
+			<svgIcon :name="menu.meta.icon" :color="MenuFtColor" />
 		</template>
 		<span :title="menu.meta.title">{{ menu.meta.title }}</span>
 	</a-menu-item>
@@ -18,6 +18,8 @@
 
 <script setup lang="ts" name="menuItem">
 import { defineProps } from 'vue'
+import { useSystemStore } from '@/store/system'
+import { storeToRefs } from 'pinia'
 
 defineProps({
 	menu: {
@@ -25,4 +27,6 @@ defineProps({
 		default: () => {}
 	}
 })
+
+const { MenuFtColor } = storeToRefs(useSystemStore())
 </script>

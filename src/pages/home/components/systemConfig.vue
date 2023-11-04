@@ -37,14 +37,22 @@
 				@click="changeMenuTheme('light')"
 			/>
 		</div>
-		<div class="mt-3">
+		<div class="mt-3 flex items-center justify-between">
 			开启 Tags-View: <a-switch v-model:checked="showTagsView" />
 		</div>
-		<div class="mt-3">
+		<div class="mt-3 flex items-center justify-between">
 			侧边栏 Logo: <a-switch v-model:checked="showRightLogo" />
 		</div>
-		<div class="mt-3">动态标题:</div>
-		<div class="mt-3">主题颜色：</div>
+		<div class="mt-3 flex items-center justify-between">
+			动态标题: <a-switch v-model:checked="showDynamicTitle" />
+		</div>
+		<div class="mt-3 flex items-center justify-between">
+			主题颜色：<input
+				type="color"
+				:value="primaryColor"
+				@input="changePrimaryColor"
+			/>
+		</div>
 	</a-drawer>
 </template>
 
@@ -52,7 +60,14 @@
 import { ref } from 'vue'
 import { useSystemStore } from '@/store/system/index'
 import { storeToRefs } from 'pinia'
-const { menuTheme, showRightLogo, showTagsView } = storeToRefs(useSystemStore())
+import { theme } from 'ant-design-vue'
+const {
+	menuTheme,
+	showRightLogo,
+	showTagsView,
+	showDynamicTitle,
+	primaryColor
+} = storeToRefs(useSystemStore())
 
 type MenuTheme = 'dark' | 'light'
 
@@ -62,7 +77,19 @@ const showDraw = () => {
 	console.log(open)
 }
 
+const { token } = theme.useToken()
+
 const changeMenuTheme = (theme: MenuTheme) => {
 	menuTheme.value = theme
 }
+
+const changePrimaryColor = (e: any) => {
+	primaryColor.value = e.target.value
+}
 </script>
+<style scoped>
+input[type='color'] {
+	border: 1px solid v-bind('token.colorBorder');
+	background-color: v-bind('token.colorBgBase');
+}
+</style>

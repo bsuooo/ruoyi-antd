@@ -9,29 +9,29 @@
 				</a-button>
 			</div>
 			<div class="navbar-right">
-				<SearchOutlined class="ml-12px font-size-22px cursor-pointer" />
+				<SearchOutlined class="ml-15px font-size-22px cursor-pointer" />
 				<GithubOutlined
-					class="ml-12px font-size-22px cursor-pointer"
+					class="ml-15px font-size-22px cursor-pointer"
 					@click="goGithub"
 				/>
 				<QuestionCircleOutlined
-					class="ml-12px font-size-22px cursor-pointer"
+					class="ml-15px font-size-22px cursor-pointer"
 					@click="goDocument"
 				/>
 				<FullscreenOutlined
 					v-if="!isScreenfull"
-					class="ml-12px font-size-22px cursor-pointer"
+					class="ml-15px font-size-22px cursor-pointer"
 					@click="changeScreenfull"
 				/>
 				<FullscreenExitOutlined
 					v-else
-					class="ml-12px font-size-22px cursor-pointer"
+					class="ml-15px font-size-22px cursor-pointer"
 					@click="changeScreenfull"
 				/>
-				<FontSizeOutlined class="ml-12px font-size-22px cursor-pointer" />
+				<FontSizeOutlined class="ml-15px font-size-22px cursor-pointer" />
 				<a-dropdown>
 					<a class="ant-dropdown-link" @click.prevent>
-						头像！
+						管理员
 						<DownOutlined />
 					</a>
 					<template #overlay>
