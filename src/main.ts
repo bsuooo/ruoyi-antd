@@ -6,6 +6,7 @@ import components from '@/components'
 import 'virtual:uno.css'
 import '@/assets/style/custom.css'
 import 'virtual:svg-icons-register'
+import '@/assets/style/dark.css'
 
 const pinia = createPinia()
 

@@ -28,7 +28,10 @@
 					class="ml-15px font-size-22px cursor-pointer"
 					@click="changeScreenfull"
 				/>
-				<FontSizeOutlined class="ml-15px font-size-22px cursor-pointer" />
+				<FontSizeOutlined
+					class="ml-15px font-size-22px cursor-pointer"
+					@click="changeDark"
+				/>
 				<a-dropdown>
 					<a class="ant-dropdown-link" @click.prevent>
 						管理员
@@ -74,7 +77,7 @@ import { message } from 'ant-design-vue'
 import { useScreenFull } from '@/hooks/useScreenFull'
 import systemConfig from './components/systemConfig.vue'
 
-const { collapsed, showTagsView } = storeToRefs(useSystemStore())
+const { collapsed, showTagsView, dark } = storeToRefs(useSystemStore())
 
 const leftWidth = computed(() => {
 	return collapsed.value ? '50px' : '220px'
@@ -99,6 +102,11 @@ const logout = () => {
 	roles.value = []
 	permissions.value = []
 	message.success('已退出登录！')
+}
+
+const changeDark = () => {
+	dark.value = !dark.value
+	document.documentElement.className = dark.value ? 'light' : 'dark'
 }
 </script>
 <style lang="less" scoped>

@@ -7,6 +7,7 @@ export const useSystemStore = defineStore('system', () => {
 	const showRightLogo = ref(true)
 	const showTagsView = ref(true)
 	const showDynamicTitle = ref(false)
+	const dark = ref(false)
 
 	const menuBgColor = computed(() => {
 		return menuTheme.value === 'dark' ? '#001529' : '#fff'
@@ -26,6 +27,7 @@ export const useSystemStore = defineStore('system', () => {
 		showRightLogo,
 		showTagsView,
 		showDynamicTitle,
-		primaryColor
+		primaryColor,
+		dark
 	}
 })
