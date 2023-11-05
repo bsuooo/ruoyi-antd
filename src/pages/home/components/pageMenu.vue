@@ -26,7 +26,7 @@ import { useMenuStore } from '@/store/menu'
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 
-const { collapsed, menuTheme, menuBgColor, MenuFtColor, showRightLogo } =
+const { collapsed, menuTheme, logoBgColor, logoFtColor, showRightLogo } =
 	storeToRefs(useSystemStore())
 const { menu } = storeToRefs(useMenuStore())
 
@@ -48,7 +48,7 @@ const menuHeight = computed(() => {
 .logo {
 	width: v-bind(leftWidth);
 	transition: all 0.5s;
-	background-color: v-bind(menuBgColor);
-	color: v-bind(MenuFtColor);
+	background-color: v-bind(logoBgColor);
+	color: v-bind(logoFtColor);
 }
 </style>

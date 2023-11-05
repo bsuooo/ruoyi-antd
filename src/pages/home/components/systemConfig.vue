@@ -8,15 +8,17 @@
 		placement="right"
 		:maskClosable="false"
 		width="250px"
+		class="bg-base"
 	>
-		<div>主题风格设置：</div>
-		<div class="mt-3">
-			<img
-				src="@/assets/img/darkMenu.svg"
-				class="mr-5 cursor-pointer"
-				@click="changeMenuTheme('dark')"
-			/>
-			<!-- <i aria-label="图标: check">
+		<div class="bg-base">
+			<div>主题风格设置：</div>
+			<div class="mt-3">
+				<img
+					src="@/assets/img/darkMenu.svg"
+					class="mr-5 cursor-pointer"
+					@click="changeMenuTheme('dark')"
+				/>
+				<!-- <i aria-label="图标: check">
 				<svg
 					viewBox="64 64 896 896"
 					data-icon="check"
@@ -31,27 +33,28 @@
 					/>
 				</svg>
 			</i> -->
-			<img
-				class="cursor-pointer"
-				src="@/assets/img/lightMenu.svg"
-				@click="changeMenuTheme('light')"
-			/>
-		</div>
-		<div class="mt-3 flex items-center justify-between">
-			开启 Tags-View: <a-switch v-model:checked="showTagsView" />
-		</div>
-		<div class="mt-3 flex items-center justify-between">
-			侧边栏 Logo: <a-switch v-model:checked="showRightLogo" />
-		</div>
-		<div class="mt-3 flex items-center justify-between">
-			动态标题: <a-switch v-model:checked="showDynamicTitle" />
-		</div>
-		<div class="mt-3 flex items-center justify-between">
-			主题颜色：<input
-				type="color"
-				:value="primaryColor"
-				@input="changePrimaryColor"
-			/>
+				<img
+					class="cursor-pointer"
+					src="@/assets/img/lightMenu.svg"
+					@click="changeMenuTheme('light')"
+				/>
+			</div>
+			<div class="mt-3 flex items-center justify-between">
+				开启 Tags-View: <a-switch v-model:checked="showTagsView" />
+			</div>
+			<div class="mt-3 flex items-center justify-between">
+				侧边栏 Logo: <a-switch v-model:checked="showRightLogo" />
+			</div>
+			<div class="mt-3 flex items-center justify-between">
+				动态标题: <a-switch v-model:checked="showDynamicTitle" />
+			</div>
+			<div class="mt-3 flex items-center justify-between">
+				主题颜色：<input
+					type="color"
+					:value="primaryColor"
+					@input="changePrimaryColor"
+				/>
+			</div>
 		</div>
 	</a-drawer>
 </template>

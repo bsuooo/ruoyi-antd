@@ -19,6 +19,19 @@ export const useSystemStore = defineStore('system', () => {
 
 	const primaryColor = ref('#1677ff')
 
+	const logoBgColor = computed(() => {
+		if (menuTheme.value === 'dark') {
+			return menuBgColor.value
+		}
+		return dark.value ? '#141414' : menuBgColor.value
+	})
+
+	const logoFtColor = computed(() => {
+		if (menuTheme.value === 'dark') {
+			return MenuFtColor.value
+		}
+		return dark.value ? '#fff' : MenuFtColor.value
+	})
 	return {
 		collapsed,
 		menuTheme,
@@ -28,6 +41,8 @@ export const useSystemStore = defineStore('system', () => {
 		showTagsView,
 		showDynamicTitle,
 		primaryColor,
-		dark
+		dark,
+		logoBgColor,
+		logoFtColor
 	}
 })

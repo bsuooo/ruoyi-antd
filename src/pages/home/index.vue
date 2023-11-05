@@ -105,8 +105,8 @@ const logout = () => {
 }
 
 const changeDark = () => {
-	dark.value = !dark.value
 	document.documentElement.className = dark.value ? 'light' : 'dark'
+	dark.value = !dark.value
 }
 </script>
 <style lang="less" scoped>

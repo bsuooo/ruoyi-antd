@@ -1,6 +1,6 @@
 <template>
 	<div class="w-full h-screen login-bg">
-		<div class="w-90 custom-div bg-white">
+		<div class="w-90 custom-div bg-base">
 			<v-form
 				ref="formRef"
 				:labelCol="{ span: 4 }"

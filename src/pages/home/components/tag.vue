@@ -1,6 +1,6 @@
 <template>
 	<span
-		class="color-white font-size-12px bg-blue p-4px ml-10px tab-list tab-list-active"
+		class="color-white font-size-12px bg-blue p-4px ml-10px tab-list tab-list-active dark:bg-#262626"
 		>首页</span
 	>
 </template>

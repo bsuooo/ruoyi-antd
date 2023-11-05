@@ -1,7 +1,7 @@
 <template>
 	<a-sub-menu v-if="menu.alwaysShow" :key="menu.path">
 		<template #icon>
-			<svgIcon :name="menu.meta.icon" :color="MenuFtColor" />
+			<svgIcon :name="menu.meta.icon" :color="logoFtColor" />
 		</template>
 		<template #title>
 			<span :title="menu.meta.title">{{ menu.meta.title }}</span>
@@ -10,7 +10,7 @@
 	</a-sub-menu>
 	<a-menu-item :key="menu.path + ''" v-else>
 		<template #icon>
-			<svgIcon :name="menu.meta.icon" :color="MenuFtColor" />
+			<svgIcon :name="menu.meta.icon" :color="logoFtColor" />
 		</template>
 		<span :title="menu.meta.title">{{ menu.meta.title }}</span>
 	</a-menu-item>
@@ -28,5 +28,5 @@ defineProps({
 	}
 })
 
-const { MenuFtColor } = storeToRefs(useSystemStore())
+const { logoFtColor } = storeToRefs(useSystemStore())
 </script>
