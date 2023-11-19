@@ -104,12 +104,50 @@ const logout = () => {
 	message.success('已退出登录！')
 }
 
-const changeDark = () => {
-	document.documentElement.className = dark.value ? 'light' : 'dark'
-	dark.value = !dark.value
+const isAppearanceTransition =
+	// @ts-expect-error: Transition API
+	document.startViewTransition &&
+	!window.matchMedia(`(prefers-reduced-motion: reduce)`).matches
+
+const changeDark = (event: MouseEvent) => {
+	if (!isAppearanceTransition) {
+		document.documentElement.className = dark.value ? 'light' : 'dark'
+		dark.value = !dark.value
+		return
+	}
+	const x = event.clientX
+	const y = event.clientY
+	const endRadius = Math.hypot(
+		Math.max(x, innerWidth - x),
+		Math.max(y, innerHeight - y)
+	)
+
+	// @ts-expect-error: Transition API
+	const transition = document.startViewTransition(() => {
+		document.documentElement.className = dark.value ? 'light' : 'dark'
+		dark.value = !dark.value
+	})
+	transition.ready.then(() => {
+		const clipPath = [
+			`circle(0px at ${x}px ${y}px)`,
+			`circle(${endRadius}px at ${x}px ${y}px)`
+		]
+		document.documentElement.animate(
+			{
+				clipPath: dark.value ? [...clipPath].reverse() : clipPath
+			},
+			{
+				duration: 300,
+				easing: 'ease-in',
+				pseudoElement: dark.value
+					? '::view-transition-old(root)'
+					: '::view-transition-new(root)'
+			}
+		)
+	})
 }
 </script>
-<style lang="less" scoped>
+<style lang="less">
 .right-container {
 	margin-left: v-bind(leftWidth);
 	transition: all 0.5s;
