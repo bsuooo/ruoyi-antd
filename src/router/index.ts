@@ -55,6 +55,8 @@ router.beforeEach((to, from, next) => {
 				.finally(() => {
 					NProcess.done()
 				})
+		} else {
+			next()
 		}
 	} else {
 		next()

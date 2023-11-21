@@ -49,7 +49,9 @@
 			</div>
 		</div>
 		<tagList v-show="showTagsView" />
-		<div class="main"></div>
+		<div class="main">
+			<RouterView />
+		</div>
 	</div>
 </template>
 

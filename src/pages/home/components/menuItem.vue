@@ -4,7 +4,9 @@
 			<svgIcon :name="menu.meta.icon" :color="logoFtColor" />
 		</template>
 		<template #title>
-			<span :title="menu.meta.title">{{ menu.meta.title }}</span>
+			<span :title="menu.meta.title" @click="go(menu)">{{
+				menu.meta.title
+			}}</span>
 		</template>
 		<menuItem v-for="m of menu.children" :key="m.path" :menu="m" />
 	</a-sub-menu>
@@ -12,7 +14,9 @@
 		<template #icon>
 			<svgIcon :name="menu.meta.icon" :color="logoFtColor" />
 		</template>
-		<span :title="menu.meta.title">{{ menu.meta.title }}</span>
+		<span :title="menu.meta.title" @click="go(menu)">{{
+			menu.meta.title
+		}}</span>
 	</a-menu-item>
 </template>
 
@@ -20,13 +24,20 @@
 import { defineProps } from 'vue'
 import { useSystemStore } from '@/store/system'
 import { storeToRefs } from 'pinia'
+import { Route } from '@/pages/login/types'
+import { useRouter } from 'vue-router'
 
-defineProps({
-	menu: {
-		type: Object,
-		default: () => {}
-	}
-})
+interface MenuProps {
+	menu: Route
+}
+
+defineProps<MenuProps>()
 
 const { logoFtColor } = storeToRefs(useSystemStore())
+
+const router = useRouter()
+const go = (menu: Route) => {
+	const { path } = menu
+	router.push(path)
+}
 </script>
