@@ -15,7 +15,7 @@
 			:inline-collapsed="collapsed"
 			:theme="menuTheme"
 		>
-			<menuItem v-for="m of menu" :key="m.path" :menu="m" />
+			<menuItem v-for="m of allMenu" :key="m.path" :menu="m" />
 		</a-menu>
 	</div>
 </template>
@@ -36,6 +36,22 @@ const leftWidth = computed(() => {
 
 const menuHeight = computed(() => {
 	return showRightLogo.value ? `calc(100vh - 50px)` : `100vh`
+})
+
+const allMenu = computed(() => {
+  const homeMenu = [
+    {
+      path: '/home',
+      component: 'Layout',
+      alwaysShow: false,
+      redirect: '/home/index',
+      meta: {
+        title: '首页',
+        icon: 'home'
+      }
+    }
+  ]
+  return [...homeMenu, ...menu.value]
 })
 </script>
 <style lang="less" scoped>

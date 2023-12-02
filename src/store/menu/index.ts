@@ -56,7 +56,7 @@ export const useMenuStore = defineStore('menu', () => {
 					component: dynamicImport(dynamicViewsModules, route.component),
 					meta: route.meta
 				}
-				router.addRoute('home', r)
+				router.addRoute('layout', r)
 			}
 		})
 	}

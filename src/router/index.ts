@@ -1,6 +1,7 @@
 import * as VueRouter from 'vue-router'
 import login from '@/pages/login/index.vue'
 import home from '@/pages/home/index.vue'
+import layout from '@/pages/layout/index.vue'
 import NProcess from 'nprogress'
 import 'nprogress/nprogress.css'
 import { getToken } from '@/utils/system'
@@ -16,11 +17,18 @@ const routes = [
 		name: 'login',
 		component: login
 	},
-	{
-		path: '/home',
-		name: 'home',
-		component: home
-	}
+  {
+    path: '/',
+    name: 'layout',
+    component: layout,
+    children: [
+      {
+        path: '/home',
+        name: 'home',
+        component: home
+      }
+    ]
+  },
 ]
 
 export const router = VueRouter.createRouter({
@@ -46,7 +54,8 @@ router.beforeEach((to, from, next) => {
 					roles.value = r
 					permissions.value = p
 					menuStore.generateRoute(routerList.data)
-					next()
+          // 刷新时，重新跳转到当前路由
+					next({ ...to, replace: true })
 				})
 				.catch((e) => {
 					console.log(e)

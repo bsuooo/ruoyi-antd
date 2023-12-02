@@ -1,14 +1,16 @@
 <template>
 	<Icon v-bind="$attrs" v-if="name">
 		<template #component>
-			<svg width="14px" height="14px">
-				<use
-					:xlink:href="iconName"
-					width="14px"
-					height="14px"
-					:fill="color"
-				></use>
-			</svg>
+			<slot>
+        <svg width="14px" height="14px">
+				  <use
+					  :xlink:href="iconName"
+					  width="14px"
+					  height="14px"
+					  :fill="color"
+				  ></use>
+			  </svg>
+      </slot>
 		</template>
 	</Icon>
 </template>

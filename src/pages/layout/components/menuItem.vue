@@ -4,17 +4,17 @@
 			<svgIcon :name="menu.meta.icon" :color="logoFtColor" />
 		</template>
 		<template #title>
-			<span :title="menu.meta.title" @click="go(menu)">{{
+			<span :title="menu.meta.title">{{
 				menu.meta.title
 			}}</span>
 		</template>
 		<menuItem v-for="m of menu.children" :key="m.path" :menu="m" />
 	</a-sub-menu>
-	<a-menu-item :key="menu.path + ''" v-else>
+	<a-menu-item :key="menu.path + ''" v-else @click="go(menu)">
 		<template #icon>
 			<svgIcon :name="menu.meta.icon" :color="logoFtColor" />
 		</template>
-		<span :title="menu.meta.title" @click="go(menu)">{{
+		<span :title="menu.meta.title">{{
 			menu.meta.title
 		}}</span>
 	</a-menu-item>
