@@ -10,6 +10,7 @@ import { storeToRefs } from 'pinia'
 import { getInfo, getRouters } from '@/pages/login/api/index'
 import { GetRoutersResult, GetInfoResult } from '@/pages/login/types/index'
 import { useMenuStore } from '@/store/menu'
+import { useTagStore } from '@/store/tag'
 
 const routes = [
 	{
@@ -24,7 +25,7 @@ const routes = [
     children: [
       {
         path: '/home',
-        name: 'home',
+        name: 'Home',
         component: home
       }
     ]
@@ -39,6 +40,7 @@ export const router = VueRouter.createRouter({
 router.beforeEach((to, from, next) => {
 	const { roles, userInfo, permissions } = storeToRefs(useUserStore())
 	const menuStore = useMenuStore()
+  const { addTag } = useTagStore()
 	NProcess.start()
 	if (to.name !== 'login') {
 		if (!getToken()) {
@@ -65,6 +67,10 @@ router.beforeEach((to, from, next) => {
 					NProcess.done()
 				})
 		} else {
+      const { name } = to
+      if (name) {
+        addTag(name as string)
+      }
 			next()
 		}
 	} else {

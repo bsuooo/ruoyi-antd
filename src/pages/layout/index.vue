@@ -1,6 +1,6 @@
 <template>
 	<pageMenu />
-	<div class="position-relative right-container">
+	<div class="position-relative right-container flex h-100% flex-col">
 		<div class="h-50px flex items-center justify-between">
 			<div class="navbar-left ml-10px">
 				<a-button @click="collapsed = !collapsed">
@@ -143,8 +143,12 @@
 			</div>
 		</div>
 		<tagList v-show="showTagsView" />
-		<div class="main">
-			<RouterView />
+		<div class="main flex-1 bg-pure">
+			<router-view v-slot="{ Component }">
+				<keep-alive :include="cacheTags">
+					<component :is="Component" />
+				</keep-alive>
+			</router-view>
 		</div>
 	</div>
 </template>
@@ -157,7 +161,6 @@ import {
 	GithubOutlined,
 	QuestionCircleOutlined,
 	FullscreenOutlined,
-	FontSizeOutlined,
 	DownOutlined,
 	FullscreenExitOutlined
 } from '@ant-design/icons-vue'
@@ -173,8 +176,11 @@ import { message } from 'ant-design-vue'
 import { useScreenFull } from '@/hooks/useScreenFull'
 import systemConfig from './components/systemConfig.vue'
 import Icon from '@ant-design/icons-vue'
+import { useTagStore } from '@/store/tag'
 
 const { collapsed, showTagsView, dark } = storeToRefs(useSystemStore())
+
+const { cacheTags } = storeToRefs(useTagStore())
 
 const leftWidth = computed(() => {
 	return collapsed.value ? '50px' : '220px'
