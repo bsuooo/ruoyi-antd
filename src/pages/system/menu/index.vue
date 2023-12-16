@@ -12,6 +12,7 @@
 				<span v-else>已删除!</span>
 			</a-space>
 		</a-card>
+    <micro-app name='menu-app' url='http://localhost:5173' iframe :keep-alive="cacheTags.includes('Menu')"></micro-app>
 	</div>
 </template>
 
