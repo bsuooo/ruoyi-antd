@@ -1,6 +1,6 @@
 <template>
 	<a-col :span="span">
-		<a-form-item :label="label" :name="name" :rules="realRules">
+		<a-form-item :label="label" :name="name" :rules="realRules" v-bind="$attrs">
 			<slot />
 		</a-form-item>
 	</a-col>

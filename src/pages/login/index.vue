@@ -37,6 +37,9 @@
 					/>
 					<a-spin v-else class="w-18%" />
 				</v-form-item>
+				<a-col class="mb-20px" :span="24">
+					<a-checkbox v-model:checked="remember">记住密码</a-checkbox>
+				</a-col>
 				<a-col :span="24">
 					<a-button
 						class="text-center"
@@ -73,6 +76,8 @@ const form = ref<LoginForm>({
 
 const imgUrl = ref('')
 
+const remember = ref(false)
+
 const getCaptcha = async () => {
 	form.value.uuid = ''
 	imgUrl.value = ''
@@ -91,6 +96,14 @@ const handleLogin = async () => {
 	loading.value = true
 	try {
 		const res = await login(form.value)
+		if (remember.value) {
+			localStorage.setItem(
+				'loginForm',
+				JSON.stringify({ ...form.value, uuid: '', code: '' })
+			)
+		} else {
+			localStorage.removeItem('loginForm')
+		}
 		token.value = res.token
 		setToken(res.token)
 		message.success('登录成功')
@@ -104,6 +117,12 @@ const handleLogin = async () => {
 
 onMounted(() => {
 	getCaptcha()
+	const loginFormStr = localStorage.getItem('loginForm')
+	if (loginFormStr) {
+		const loginForm = JSON.parse(loginFormStr)
+		form.value = loginForm
+		remember.value = true
+	}
 })
 </script>
 
@@ -129,7 +148,7 @@ onMounted(() => {
 }
 
 .verify {
-	/deep/ .ant-form-item-control-input-content {
+	::v-deep(.ant-form-item-control-input-content) {
 		display: flex;
 	}
 }

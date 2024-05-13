@@ -143,7 +143,7 @@
 			</div>
 		</div>
 		<tagList v-show="showTagsView" />
-		<div class="main flex-1 bg-pure">
+		<div class="main flex-1 bg-pure p-16px">
 			<router-view v-slot="{ Component }">
 				<keep-alive :include="cacheTags">
 					<component :is="Component" />

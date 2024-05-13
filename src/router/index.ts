@@ -18,18 +18,18 @@ const routes = [
 		name: 'login',
 		component: login
 	},
-  {
-    path: '/',
-    name: 'layout',
-    component: layout,
-    children: [
-      {
-        path: '/home',
-        name: 'Home',
-        component: home
-      }
-    ]
-  },
+	{
+		path: '/',
+		name: 'layout',
+		component: layout,
+		children: [
+			{
+				path: '/home',
+				name: 'Home',
+				component: home
+			}
+		]
+	}
 ]
 
 export const router = VueRouter.createRouter({
@@ -40,7 +40,7 @@ export const router = VueRouter.createRouter({
 router.beforeEach((to, from, next) => {
 	const { roles, userInfo, permissions } = storeToRefs(useUserStore())
 	const menuStore = useMenuStore()
-  const { addTag } = useTagStore()
+	const { addTag } = useTagStore()
 	NProcess.start()
 	if (to.name !== 'login') {
 		if (!getToken()) {
@@ -56,7 +56,7 @@ router.beforeEach((to, from, next) => {
 					roles.value = r
 					permissions.value = p
 					menuStore.generateRoute(routerList.data)
-          // 刷新时，重新跳转到当前路由
+					// 刷新时，重新跳转到当前路由
 					next({ ...to, replace: true })
 				})
 				.catch((e) => {
@@ -67,10 +67,10 @@ router.beforeEach((to, from, next) => {
 					NProcess.done()
 				})
 		} else {
-      const { name } = to
-      if (name) {
-        addTag(name as string)
-      }
+			const { name } = to
+			if (name) {
+				addTag(name as string)
+			}
 			next()
 		}
 	} else {

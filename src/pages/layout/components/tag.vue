@@ -24,9 +24,8 @@ const go = (name: string | undefined) => {
 const token = useThemeToken()
 </script>
 <style scoped>
-/* todo: less 使用v-bind 报错 */
 .tab-list-active {
-	background: v-bind(token.colorPrimary);
+	background: v-bind('token.colorPrimary');
 }
 
 .tab-list-active::before {

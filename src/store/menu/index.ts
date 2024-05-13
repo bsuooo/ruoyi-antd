@@ -1,7 +1,8 @@
 import { Route } from '@/pages/login/types'
+import { isUrl } from '@/utils/isUrl'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { RouteRecordRaw, useRouter } from 'vue-router'
 
 declare type Recordable<T = any> = Record<string, T>
 function dynamicImport(
@@ -42,7 +43,9 @@ export const useMenuStore = defineStore('menu', () => {
 		const dynamicViewsModules: Record<string, () => Promise<Recordable>> =
 			import.meta.glob('/src/pages/**/*.{vue,tsx}')
 		r.forEach((route) => {
-			route.path = route.path.charAt(0) === '/' ? route.path : `/${route.path}`
+			const path = route.path
+			route.path =
+				path.charAt(0) === '/' || isUrl(path) ? route.path : `/${route.path}`
 			if (parentRoute) {
 				route.path = `${parentRoute.path}${route.path}`
 			}
@@ -56,7 +59,7 @@ export const useMenuStore = defineStore('menu', () => {
 					component: dynamicImport(dynamicViewsModules, route.component),
 					meta: route.meta
 				}
-				router.addRoute('layout', r)
+				router.addRoute('layout', r as RouteRecordRaw)
 			}
 		})
 	}

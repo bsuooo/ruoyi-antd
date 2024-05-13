@@ -4,9 +4,7 @@
 			<svgIcon :name="menu.meta.icon" :color="logoFtColor" />
 		</template>
 		<template #title>
-			<span :title="menu.meta.title">{{
-				menu.meta.title
-			}}</span>
+			<span :title="menu.meta.title">{{ menu.meta.title }}</span>
 		</template>
 		<menuItem v-for="m of menu.children" :key="m.path" :menu="m" />
 	</a-sub-menu>
@@ -14,9 +12,7 @@
 		<template #icon>
 			<svgIcon :name="menu.meta.icon" :color="logoFtColor" />
 		</template>
-		<span :title="menu.meta.title">{{
-			menu.meta.title
-		}}</span>
+		<span :title="menu.meta.title">{{ menu.meta.title }}</span>
 	</a-menu-item>
 </template>
 
@@ -26,6 +22,7 @@ import { useSystemStore } from '@/store/system'
 import { storeToRefs } from 'pinia'
 import { Route } from '@/pages/login/types'
 import { useRouter } from 'vue-router'
+import { isUrl } from '@/utils/isUrl'
 
 interface MenuProps {
 	menu: Route
@@ -38,6 +35,10 @@ const { logoFtColor } = storeToRefs(useSystemStore())
 const router = useRouter()
 const go = (menu: Route) => {
 	const { path } = menu
-	router.push(path)
+	if (isUrl(path)) {
+		window.open(path)
+	} else {
+		router.push(path)
+	}
 }
 </script>
