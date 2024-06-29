@@ -39,19 +39,19 @@ const menuHeight = computed(() => {
 })
 
 const allMenu = computed(() => {
-  const homeMenu = [
-    {
-      path: '/home',
-      component: 'Layout',
-      alwaysShow: false,
-      redirect: '/home/index',
-      meta: {
-        title: '首页',
-        icon: 'home'
-      }
-    }
-  ]
-  return [...homeMenu, ...menu.value]
+	const homeMenu = [
+		{
+			path: '/home',
+			component: 'Layout',
+			alwaysShow: false,
+			redirect: '/home/index',
+			meta: {
+				title: '首页',
+				icon: 'home'
+			}
+		}
+	]
+	return [...homeMenu, ...menu.value]
 })
 </script>
 <style lang="less" scoped>

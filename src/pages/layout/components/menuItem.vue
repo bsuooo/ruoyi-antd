@@ -25,7 +25,7 @@ import { useRouter } from 'vue-router'
 import { isUrl } from '@/utils/isUrl'
 
 interface MenuProps {
-	menu: Route
+	menu: any
 }
 
 defineProps<MenuProps>()

@@ -38,6 +38,7 @@ export const router = VueRouter.createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+	console.log(from)
 	const { roles, userInfo, permissions } = storeToRefs(useUserStore())
 	const menuStore = useMenuStore()
 	const { addTag } = useTagStore()
