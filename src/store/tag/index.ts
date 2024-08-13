@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 export const useTagStore = defineStore('tag', () => {
-	const currentRouteTitle = ref('首页')
-	const defaultTitle = 'ruoyi-antd'
+  const currentRouteTitle = ref('首页')
+  const defaultTitle = 'ruoyi-antd'
   const cacheTags = ref<string[]>([])
   const router = useRouter()
   const route = useRoute()
@@ -18,19 +18,19 @@ export const useTagStore = defineStore('tag', () => {
 
   const delTag = (componentName: string) => {
     const index = cacheTags.value.findIndex(it => it === componentName)
-    if(index !== -1 ) {
+    if (index !== -1) {
       cacheTags.value.splice(index, 1)
     }
     if (route.name === componentName) {
-      router.replace({name: cacheTags.value[cacheTags.value.length - 1]})
+      router.replace({ name: cacheTags.value[cacheTags.value.length - 1] })
     }
   }
 
-	return {
-		currentRouteTitle,
-		defaultTitle,
+  return {
+    currentRouteTitle,
+    defaultTitle,
     cacheTags,
     addTag,
-    delTag
-	}
+    delTag,
+  }
 })

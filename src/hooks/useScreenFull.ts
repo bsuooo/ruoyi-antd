@@ -1,36 +1,36 @@
 import screenfull from 'screenfull'
-import { onMounted, ref, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import { message } from 'ant-design-vue'
 
-export const useScreenFull = () => {
-	const isScreenfull = ref(false)
+export function useScreenFull() {
+  const isScreenfull = ref(false)
 
-	onMounted(() => {
-		if (screenfull.isEnabled) {
-			screenfull.on('change', changeStatus)
-		}
-	})
+  const changeStatus = () => {
+    isScreenfull.value = screenfull.isFullscreen
+  }
 
-	onUnmounted(() => {
-		if (screenfull.isEnabled) {
-			screenfull.off('change', changeStatus)
-		}
-	})
+  onMounted(() => {
+    if (screenfull.isEnabled) {
+      screenfull.on('change', changeStatus)
+    }
+  })
 
-	const changeStatus = () => {
-		isScreenfull.value = screenfull.isFullscreen
-	}
+  onUnmounted(() => {
+    if (screenfull.isEnabled) {
+      screenfull.off('change', changeStatus)
+    }
+  })
 
-	const changeScreenfull = () => {
-		if (screenfull.isEnabled) {
-			screenfull.toggle()
-			return
-		}
-		message.warning('当前浏览器不支持全屏')
-	}
+  const changeScreenfull = () => {
+    if (screenfull.isEnabled) {
+      screenfull.toggle()
+      return
+    }
+    message.warning('当前浏览器不支持全屏')
+  }
 
-	return {
-		isScreenfull,
-		changeScreenfull
-	}
+  return {
+    isScreenfull,
+    changeScreenfull,
+  }
 }

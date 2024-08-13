@@ -1,52 +1,53 @@
 {
-	"name": "ruoyi-antd",
-	"private": true,
-	"version": "0.0.0",
-	"scripts": {
-		"dev": "vite --host",
-		"build": "vue-tsc && vite build",
-		"preview": "vite preview",
-		"lint": "eslint . --ext .vue,.js,.ts,.jsx,.cjs,.tsx --fix",
-		"prettierrc": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
-		"prepare": "husky install",
-		"test": "vitest"
-	},
-	"dependencies": {
-		"@micro-zoe/micro-app": "^1.0.0-rc.2",
-		"@types/js-cookie": "^3.0.5",
-		"@vueuse/core": "^10.5.0",
-		"ant-design-vue": "^4.0.6",
-		"axios": "^1.5.1",
-		"js-cookie": "^3.0.5",
-		"nprogress": "^0.2.0",
-		"pinia": "^2.1.7",
-		"screenfull": "^6.0.2",
-		"vue": "^3.3.4",
-		"vue-router": "^4.2.5"
-	},
-	"devDependencies": {
-		"@types/node": "^20.8.7",
-		"@types/nprogress": "^0.2.2",
-		"@typescript-eslint/eslint-plugin": "^6.8.0",
-		"@typescript-eslint/parser": "^6.8.0",
-		"@vitejs/plugin-vue": "^4.2.3",
-		"@vue/test-utils": "^2.4.1",
-		"eslint": "^8.51.0",
-		"eslint-config-prettier": "^9.0.0",
-		"eslint-plugin-prettier": "^5.0.1",
-		"eslint-plugin-vue": "^9.17.0",
-		"fast-glob": "^3.3.1",
-		"husky": "^8.0.3",
-		"jsdom": "^22.1.0",
-		"less": "^4.2.0",
-		"prettier": "^3.0.3",
-		"typescript": "^5.0.2",
-		"unocss": "^0.56.5",
-		"unplugin-vue-components": "^0.25.2",
-		"vite": "^4.4.5",
-		"vite-plugin-svg-icons": "^2.0.1",
-		"vite-plugin-vue-setup-extend": "^0.4.0",
-		"vitest": "^0.34.6",
-		"vue-tsc": "^1.8.5"
-	}
+  "name": "ruoyi-antd",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
+    "prepare": "husky install",
+    "lint": "eslint . --fix",
+    "test": "vitest",
+    "lint-staged": "lint-staged"
+  },
+  "dependencies": {
+    "@types/js-cookie": "^3.0.5",
+    "@vueuse/core": "^10.5.0",
+    "ant-design-vue": "^4.0.6",
+    "axios": "^1.5.1",
+    "js-cookie": "^3.0.5",
+    "nprogress": "^0.2.0",
+    "pinia": "^2.1.7",
+    "screenfull": "^6.0.2",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.25.1",
+    "@types/node": "^20.8.7",
+    "@types/nprogress": "^0.2.2",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/test-utils": "^2.4.1",
+    "eslint": "^9.9.0",
+    "fast-glob": "^3.3.1",
+    "husky": "^8.0.3",
+    "jsdom": "^22.1.0",
+    "less": "^4.2.0",
+    "lint-staged": "^15.2.9",
+    "typescript": "^5.0.2",
+    "unocss": "^0.56.5",
+    "unplugin-vue-components": "^0.25.2",
+    "vite": "^4.4.5",
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vite-plugin-vue-setup-extend": "^0.4.0",
+    "vitest": "^0.34.6",
+    "vue-tsc": "^1.8.5"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,vue}": [
+      "eslint . --fix"
+    ]
+  }
 }
