@@ -1,5 +1,5 @@
 <script setup lang="ts" name="vFormItem">
-import { computed, defineProps } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   label: {

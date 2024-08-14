@@ -1,6 +1,6 @@
 <script setup lang="ts" name="svgIcon">
 import Icon from '@ant-design/icons-vue'
-import { computed, defineProps } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   name: {

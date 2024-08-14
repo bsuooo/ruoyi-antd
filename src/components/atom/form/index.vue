@@ -1,5 +1,4 @@
 <script setup lang="ts" name="vvForm">
-import { defineProps } from 'vue'
 import vForm from '@/components/atom/form/components/form.vue'
 import vFormItem from '@/components/atom/form/components/formItem.vue'
 

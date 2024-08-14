@@ -4,6 +4,7 @@ import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import UnoCSS from 'unocss/vite'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import vueSetupExtend from 'vite-plugin-vue-setup-extend-plus'
 import path from 'node:path'
 import type { ConfigEnv } from 'vite'
 
@@ -13,6 +14,7 @@ export default defineConfig(({ mode }: ConfigEnv) => {
   return {
     plugins: [
       vue(),
+      vueSetupExtend(),
       UnoCSS(),
       Components({
         resolvers: [

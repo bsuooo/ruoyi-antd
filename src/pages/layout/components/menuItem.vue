@@ -1,5 +1,4 @@
 <script setup lang="ts" name="menuItem">
-import { defineProps } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import type { Route } from '@/pages/login/types'

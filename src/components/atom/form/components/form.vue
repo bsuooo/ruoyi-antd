@@ -1,5 +1,5 @@
 <script setup lang="ts" name="vForm">
-import { defineProps, ref } from 'vue'
+import { ref } from 'vue'
 import type { NamePath } from 'ant-design-vue/lib/form/interface'
 
 defineProps({
