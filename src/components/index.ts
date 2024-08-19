@@ -1,6 +1,6 @@
 import type { App } from 'vue'
 import vForm from '@/components/atom/form/components/form.vue'
-import vFormItem from '@/components/atom/form/components/formItem.vue'
+import vFormItem from '@/components/atom/form/components/formItem.tsx'
 import svgIcon from '@/components/atom/svgIcon/index.vue'
 import baseCard from '@/components/atom/baseCard/index.vue'
 

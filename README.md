@@ -2,15 +2,16 @@
 
 ### todo
 
-- lint-stage  ✅
+- lint-stage ✅
 - vue-extend-setup 替代品 ✅
-- 去除组件封装 / 简单的统一封装？
+- 去除组件封装 / 简单的统一封装？ ✅
+- 支持 tsx ✅
 - 黑暗按钮 样式修改
 - tab栏
 - 基础页面组装一个
 - dockerFile 自动化更新
 - 字典封装
-- unocss 的图标功能 ？
+- unocss 的图标功能 引入 iconify ？
 - 补充单元测试
 - miniIO文件上传
 - 大文件分片上传，续传

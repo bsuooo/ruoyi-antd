@@ -1,28 +1,31 @@
 <script setup lang="ts" name="vForm">
-import { ref } from 'vue'
+import { translateFormSpan } from '../utils'
+import { provide, ref } from 'vue'
+import type { FormSpan, ProvideVForm } from '../types'
 import type { NamePath } from 'ant-design-vue/lib/form/interface'
 
-defineProps({
-  model: {
-    type: Object,
-    default: () => {},
-  },
-  name: {
-    type: String,
-    default: 'basic',
-  },
-  labelCol: {
-    type: Object,
-    default: () => ({ span: 6 }),
-  },
-  wrapperCol: {
-    type: Object,
-    default: () => ({ span: 18 }),
-  },
-  autocomplete: {
-    type: Boolean,
-    default: false,
-  },
+interface Props {
+  model?: Record<string, any>
+  name?: string
+  labelCol?: object
+  wrapperCol?: object
+  autocomplete?: boolean
+  span?: FormSpan
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  model: () => ({}),
+  name: 'basic',
+  labelCol: () => ({ span: 6 }),
+  wrapperCol: () => ({ span: 18 }),
+  autocomplete: false,
+  span: 24,
+})
+
+const key = 'v-form'
+provide<ProvideVForm>(key, {
+  form: props.model,
+  span: translateFormSpan(props.span),
 })
 
 const formRef = ref()
