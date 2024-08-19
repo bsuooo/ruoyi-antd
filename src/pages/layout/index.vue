@@ -2,17 +2,11 @@
 import tagList from './components/tagList.vue'
 import pageMenu from './components/pageMenu.vue'
 import systemConfig from './components/systemConfig.vue'
-import Icon, {
+import search from './components/search.vue'
+import {
   DownOutlined,
-  FullscreenExitOutlined,
-  FullscreenOutlined,
-  GithubOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  QuestionCircleOutlined,
-  SearchOutlined,
 } from '@ant-design/icons-vue'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
@@ -31,11 +25,16 @@ const leftWidth = computed(() => {
 })
 
 function goGithub() {
-  window.open('https://github.com/mmmmr/ruoyi-antd')
+  window.open('https://github.com/bsuooo/ruoyi-antd')
 }
 
 function goDocument() {
   window.open('http://doc.ruoyi.vip/ruoyi-vue/')
+}
+
+const searchVisible = ref(false)
+function handleSearch() {
+  searchVisible.value = true
 }
 
 const { changeScreenfull, isScreenfull } = useScreenFull()
@@ -100,13 +99,11 @@ function changeDark(event: MouseEvent) {
   <div class="position-relative right-container flex h-100% flex-col">
     <div class="h-50px flex items-center justify-between">
       <div class="navbar-left ml-10px">
-        <a-button @click="collapsed = !collapsed">
-          <MenuUnfoldOutlined v-if="collapsed" />
-          <MenuFoldOutlined v-else />
-        </a-button>
+        <span v-if="collapsed" class="i-line-md:menu-fold-right cursor-pointer" @click="collapsed = !collapsed" />
+        <span v-else class="i-line-md:menu-fold-left cursor-pointer" @click="collapsed = !collapsed" />
       </div>
       <div class="navbar-right flex items-center">
-        <span class="i-ic:round-search ml-15px font-size-22px cursor-pointer" @click="goGithub" />
+        <span class="i-ic:round-search ml-15px font-size-22px cursor-pointer" @click="handleSearch" />
         <span class="i-ri:github-fill ml-15px font-size-22px cursor-pointer" @click="goGithub" />
         <span class="i-solar:document-broken ml-15px font-size-22px cursor-pointer" @click="goDocument" />
         <span v-if="!isScreenfull" class="i-mingcute:fullscreen-2-line ml-15px font-size-22px cursor-pointer" @click="changeScreenfull" />
@@ -137,6 +134,7 @@ function changeDark(event: MouseEvent) {
         </keep-alive>
       </router-view>
     </div>
+    <search v-model:visible="searchVisible" />
   </div>
 </template>
 

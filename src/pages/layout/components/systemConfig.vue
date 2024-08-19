@@ -38,7 +38,6 @@ function changePrimaryColor(e: any) {
     v-model:open="open"
     title="系统风格设置"
     placement="right"
-    :mask-closable="false"
     width="250px"
     class="bg-base"
   >
