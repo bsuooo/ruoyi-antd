@@ -1,15 +1,8 @@
 import { defineConfig, presetAttributify, presetIcons, presetUno } from 'unocss'
-import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
 
 export default defineConfig({
   presets: [
     presetIcons({
-      collections: {
-        'local-icons': FileSystemIconLoader(
-          './src/assets/icon/svg',
-          svg => svg.replace(/#fff/, 'currentColor'),
-        ),
-      },
       extraProperties: {
         'display': 'inline-block',
         'vertical-align': 'middle',
