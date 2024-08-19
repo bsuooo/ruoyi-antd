@@ -23,6 +23,7 @@
     "pinia": "^2.1.7",
     "screenfull": "^6.0.2",
     "vue": "^3.3.4",
+    "vue-i18n": "^9.14.0",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {

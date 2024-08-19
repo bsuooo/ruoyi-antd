@@ -83,14 +83,14 @@ onMounted(() => {
         <h3 class="login-title">
           若依后台管理系统
         </h3>
-        <v-form-item label="账号" :span="24" required name="username">
+        <v-form-item label="system.account" :span="24" required name="username">
           <a-input v-model:value="form.username" />
         </v-form-item>
-        <v-form-item label="密码" :span="24" required name="password">
+        <v-form-item label="system.password" :span="24" required name="password">
           <a-input-password v-model:value="form.password" />
         </v-form-item>
         <v-form-item
-          label="验证码"
+          label="system.verification-code"
           :span="24"
           class="verify"
           required
@@ -113,7 +113,7 @@ onMounted(() => {
         </v-form-item>
         <a-col class="mb-20px" :span="24">
           <a-checkbox v-model:checked="remember">
-            记住密码
+            {{ $t('system.remember-me') }}
           </a-checkbox>
         </a-col>
         <a-col :span="24">
@@ -125,7 +125,7 @@ onMounted(() => {
             :loading="loading"
             @click="handleLogin"
           >
-            {{ loading ? '登录中...' : '登录' }}
+            {{ loading ? $t('system.login-loading') : $t('system.login') }}
           </a-button>
         </a-col>
       </v-form>

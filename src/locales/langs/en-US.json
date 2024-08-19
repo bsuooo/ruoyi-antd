@@ -1,0 +1,13 @@
+{
+  "system": {
+    "login": "Login",
+    "login-loading": "loading...",
+    "account": "account",
+    "password": "password",
+    "verification-code": "code",
+    "remember-me": "remember me",
+    "logout": "Logout",
+    "logout-confirm": "Are you sure you want to log out?",
+    "logout-confirm-ok": "OK"
+  }
+}

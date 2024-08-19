@@ -1,0 +1,13 @@
+{
+  "system": {
+    "login": "登录",
+    "login-loading": "登录中...",
+    "account": "账号",
+    "password": "密码",
+    "verification-code": "验证码",
+    "remember-me": "记住密码",
+    "logout": "退出登录",
+    "logout-confirm": "确定要退出登录吗？",
+    "logout-confirm-ok": "确定"
+  }
+}

@@ -3,6 +3,7 @@ import { computed, defineComponent, inject, useAttrs, useSlots } from 'vue'
 import { Col as ACol, FormItem as AFormItem } from 'ant-design-vue'
 import type { PropType } from 'vue'
 import type { FormSpan, ProvideVForm } from '../types'
+import { $t } from '@/locales'
 
 function FormItemProps() {
   return {
@@ -27,6 +28,11 @@ function FormItemProps() {
       default: false,
       require: false,
     },
+    needTranslate: {
+      type: Boolean,
+      default: true,
+      require: false,
+    },
   }
 }
 
@@ -35,9 +41,15 @@ export default defineComponent({
   props: FormItemProps(),
   setup(props) {
     const injectVForm = inject<ProvideVForm>('v-form')
-
     const hasFormParent = computed(() => {
       return injectVForm !== undefined
+    })
+
+    const translatedLabel = computed(() => {
+      if (props.label && props.needTranslate) {
+        return $t(props.label)
+      }
+      return ''
     })
 
     const span = computed(() => {
@@ -55,7 +67,7 @@ export default defineComponent({
         return [
           {
             required: true,
-            message: `${props.label}不能为空！`,
+            message: `${translatedLabel.value}不能为空！`,
             trigger: ['change'],
           },
         ]
@@ -69,7 +81,7 @@ export default defineComponent({
     const FormItem = () => (
       <AFormItem
         {...attrs}
-        label={props.label}
+        label={translatedLabel.value}
         name={props.name}
         rules={realRules.value}
         v-slots={{ ...slots }}

@@ -9,7 +9,8 @@ import '@/assets/style/custom.css'
 import 'virtual:svg-icons-register'
 import '@/assets/style/dark.css'
 import directives from '@/directives'
+import { setupI18n } from '@/locales'
 
 const pinia = createPinia()
 
-createApp(App).use(router).use(directives).use(components).use(pinia).mount('#app')
+createApp(App).use(setupI18n).use(router).use(directives).use(components).use(pinia).mount('#app')
