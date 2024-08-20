@@ -7,7 +7,7 @@ import { useTagStore } from '@/store/tag'
 const { cacheTags } = storeToRefs(useTagStore())
 
 const allTags = computed(() => {
-  return ['Home', ...cacheTags.value]
+  return [{ path: '/home', meta: { title: '首页' } }, ...cacheTags.value]
 })
 </script>
 

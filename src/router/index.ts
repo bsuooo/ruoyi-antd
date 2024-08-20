@@ -38,7 +38,6 @@ export const router = VueRouter.createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(from)
   const { roles, userInfo, permissions } = storeToRefs(useUserStore())
   const menuStore = useMenuStore()
   const { addTag } = useTagStore()
@@ -69,9 +68,9 @@ router.beforeEach((to, from, next) => {
         })
     }
     else {
-      const { name } = to
-      if (name) {
-        addTag(name as string)
+      const { path } = to
+      if (path) {
+        addTag(path)
       }
       next()
     }

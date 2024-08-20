@@ -70,10 +70,15 @@ export const useMenuStore = defineStore('menu', () => {
     })
   }
 
+  function getMenuByPath(path: string) {
+    return menuMap[path] || undefined
+  }
+
   return {
     menu,
     formatRoutes,
     generateRoute,
     menuMap,
+    getMenuByPath,
   }
 })
