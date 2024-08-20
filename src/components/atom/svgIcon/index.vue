@@ -11,6 +11,14 @@ const props = defineProps({
     type: String,
     default: '#fff',
   },
+  width: {
+    type: String,
+    default: '14px',
+  },
+  height: {
+    type: String,
+    default: '14px',
+  },
 })
 
 const iconName = computed(() => {
@@ -22,11 +30,11 @@ const iconName = computed(() => {
   <Icon v-if="name" v-bind="$attrs">
     <template #component>
       <slot>
-        <svg width="14px" height="14px">
+        <svg :width="width" :height="height">
           <use
             :xlink:href="iconName"
-            width="14px"
-            height="14px"
+            :width="width"
+            :height="height"
             :fill="color"
           />
         </svg>

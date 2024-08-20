@@ -21,9 +21,9 @@ const show = computed({
   },
 })
 
-useAddEvent(document, 'keydown', (e) => {
-  const { code } = e as KeyboardEvent
-  if (code === 'Escape') {
+useAddEvent<'keydown'>(document, 'keydown', (e) => {
+  const { key } = e
+  if (key === 'Escape') {
     show.value = false
   }
 })
@@ -35,7 +35,6 @@ useAddEvent(document, 'keydown', (e) => {
 
 <style lang="less">
 .search-mask {
-  background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(3px);
 }
 </style>

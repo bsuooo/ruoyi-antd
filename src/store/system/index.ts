@@ -8,6 +8,10 @@ export const useSystemStore = defineStore('system', () => {
   const showTagsView = ref(true)
   const showDynamicTitle = ref(false)
   const dark = ref(false)
+  const currentRouteTitle = ref('首页')
+  const defaultTitle = ref('ruoyi-antd')
+
+  // todo 重构
 
   const menuBgColor = computed(() => {
     return menuTheme.value === 'dark' ? '#001529' : '#fff'
@@ -44,5 +48,7 @@ export const useSystemStore = defineStore('system', () => {
     dark,
     logoBgColor,
     logoFtColor,
+    currentRouteTitle,
+    defaultTitle,
   }
 })

@@ -12,7 +12,7 @@ const allTags = computed(() => {
 </script>
 
 <template>
-  <div class="h-30px mt-4px mb-4px">
+  <div class="h-36px border-t-1px border-b-1px border-l-0 border-r-0 base-border-color border-solid flex items-center">
     <tag v-for="tag of allTags" :key="tag" :tag="tag" />
   </div>
 </template>

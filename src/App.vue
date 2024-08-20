@@ -3,18 +3,15 @@ import { storeToRefs } from 'pinia'
 import { effect } from 'vue'
 import { theme } from 'ant-design-vue'
 import { useSystemStore } from '@/store/system/index'
-import { useTagStore } from '@/store/tag/index'
 
-const { showDynamicTitle, primaryColor, dark } = storeToRefs(useSystemStore())
-const { currentRouteTitle } = storeToRefs(useTagStore())
-const { defaultTitle } = useTagStore()
+const { showDynamicTitle, primaryColor, dark, currentRouteTitle, defaultTitle } = storeToRefs(useSystemStore())
 
 effect(() => {
   if (showDynamicTitle.value) {
-    document.title = `${defaultTitle} - ${currentRouteTitle.value}`
+    document.title = `${defaultTitle?.value} - ${currentRouteTitle?.value}`
     return
   }
-  document.title = defaultTitle
+  document.title = defaultTitle?.value
 })
 </script>
 

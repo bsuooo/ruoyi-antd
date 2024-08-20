@@ -3,8 +3,6 @@ import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 export const useTagStore = defineStore('tag', () => {
-  const currentRouteTitle = ref('首页')
-  const defaultTitle = 'ruoyi-antd'
   const cacheTags = ref<string[]>([])
   const router = useRouter()
   const route = useRoute()
@@ -27,8 +25,6 @@ export const useTagStore = defineStore('tag', () => {
   }
 
   return {
-    currentRouteTitle,
-    defaultTitle,
     cacheTags,
     addTag,
     delTag,

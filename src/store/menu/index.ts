@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import type { Route } from '@/pages/login/types'
@@ -35,6 +35,8 @@ function dynamicImport(
 export const useMenuStore = defineStore('menu', () => {
   const menu = ref<Route[]>([])
 
+  const menuMap = reactive<Record<string, Route>>({})
+
   const router = useRouter()
 
   function generateRoute(routes: Route[]) {
@@ -55,6 +57,7 @@ export const useMenuStore = defineStore('menu', () => {
       if (route.children && route.children.length > 0) {
         formatRoutes(route.children, route)
       }
+      menuMap[route.path] = route
       if (!route.alwaysShow) {
         const r = {
           path: route.path,
@@ -71,5 +74,6 @@ export const useMenuStore = defineStore('menu', () => {
     menu,
     formatRoutes,
     generateRoute,
+    menuMap,
   }
 })

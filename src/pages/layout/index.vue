@@ -15,6 +15,7 @@ import { removeToken } from '@/utils/system'
 import { useUserStore } from '@/store/user'
 import { useScreenFull } from '@/hooks/useScreenFull'
 import { useTagStore } from '@/store/tag'
+import { useMultipleKeydownEvent } from '@/hooks/useAddEvent'
 
 const { collapsed, showTagsView, dark } = storeToRefs(useSystemStore())
 
@@ -36,6 +37,11 @@ const searchVisible = ref(false)
 function handleSearch() {
   searchVisible.value = true
 }
+
+// 显示搜索
+useMultipleKeydownEvent(document, ['Meta', 'k'], () => {
+  handleSearch()
+})
 
 const { changeScreenfull, isScreenfull } = useScreenFull()
 
