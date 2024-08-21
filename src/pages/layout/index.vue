@@ -14,12 +14,9 @@ import { useSystemStore } from '@/store/system/index'
 import { removeToken } from '@/utils/system'
 import { useUserStore } from '@/store/user'
 import { useScreenFull } from '@/hooks/useScreenFull'
-import { useTagStore } from '@/store/tag'
 import { useMultipleKeydownEvent } from '@/hooks/useAddEvent'
 
 const { collapsed, showTagsView, dark } = storeToRefs(useSystemStore())
-
-const { cacheTags } = storeToRefs(useTagStore())
 
 const leftWidth = computed(() => {
   return collapsed.value ? '50px' : '220px'
@@ -135,7 +132,7 @@ function changeDark(event: MouseEvent) {
     <tagList v-show="showTagsView" />
     <div class="main flex-1 bg-pure p-16px">
       <router-view v-slot="{ Component }">
-        <keep-alive :include="cacheTags">
+        <keep-alive>
           <component :is="Component" />
         </keep-alive>
       </router-view>

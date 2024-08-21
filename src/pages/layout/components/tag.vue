@@ -75,7 +75,7 @@ const activeTagBg = computed(() => {
     :class="{ 'tab-list-active': isActive }"
     @click="go(tag)"
   >
-    <svgIcon class="mr-8px" width="12px" height="12px" name="guide" :color="isDark ? 'white' : 'black'" />
+    <svgIcon class="mr-8px" width="12px" height="12px" :name="tag.meta.icon || 'form'" :color="isDark ? 'white' : isActive ? token.colorPrimaryActive : 'black'" />
     <span>{{ tag.meta.title }}</span>
     <span v-if="tag.path === '/home'" class="i-bi:pin absolute right-8px w-12px h-12px" />
     <span v-else class="i-ic:round-close absolute right-8px w-12px h-12px hover:scale-150 transition-transform duration-300" @click.stop="delTag(tag.path)" />

@@ -1,18 +1,33 @@
 <script setup lang="ts">
 import tag from './tag.vue'
+import tagMenu from './tagMenu'
 import { storeToRefs } from 'pinia'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import type { Route } from '@/pages/login/types'
 import { useTagStore } from '@/store/tag'
 
 const { cacheTags } = storeToRefs(useTagStore())
 
 const allTags = computed(() => {
-  return [{ path: '/home', meta: { title: '首页' } }, ...cacheTags.value]
+  return [{ path: '/home', meta: { title: '首页' } }, ...cacheTags.value] as Route[]
 })
+
+const tagMenuRef = ref()
+
+function handleClick(evt: MouseEvent, tag: Route) {
+  const { clientX, clientY } = evt
+
+  tagMenuRef.value.showRightMenu({
+    x: clientX,
+    y: clientY,
+    tag,
+  })
+}
 </script>
 
 <template>
   <div class="h-36px border-t-1px border-b-1px border-l-0 border-r-0 base-border-color border-solid flex items-center">
-    <tag v-for="tag of allTags" :key="tag" :tag="tag" />
+    <tag v-for="tag of allTags" :key="tag" :tag="tag" @click="handleClick($event, tag)" />
+    <tagMenu ref="tagMenuRef" />
   </div>
 </template>
