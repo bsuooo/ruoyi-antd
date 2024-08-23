@@ -32,10 +32,14 @@ function dynamicImport(
   }
 }
 
+const relationCache: Record<string, string[]> = {}
+
 export const useMenuStore = defineStore('menu', () => {
   const menu = ref<Route[]>([])
 
   const menuMap = reactive<Record<string, Route>>({})
+
+  const relationMap = reactive<Record<string, string>>({})
 
   const router = useRouter()
 
@@ -53,6 +57,7 @@ export const useMenuStore = defineStore('menu', () => {
       = path.charAt(0) === '/' || isUrl(path) ? route.path : `/${route.path}`
       if (parentRoute) {
         route.path = `${parentRoute.path}${route.path}`
+        relationMap[route.path] = parentRoute.path
       }
       if (route.children && route.children.length > 0) {
         formatRoutes(route.children, route)
@@ -74,11 +79,30 @@ export const useMenuStore = defineStore('menu', () => {
     return menuMap[path] || undefined
   }
 
+  function getBreadcrumb(p: string) {
+    let result = relationCache[p]
+    if (result) {
+      return result
+    }
+    result = []
+    let path = p
+    while (path) {
+      result.unshift(menuMap[path]?.meta?.title)
+      path = relationMap[path]
+    }
+    if (!relationCache[p]) {
+      relationCache[p] = result
+    }
+    return result
+  }
+
   return {
     menu,
     formatRoutes,
     generateRoute,
     menuMap,
     getMenuByPath,
+    getBreadcrumb,
+    relationCache,
   }
 })

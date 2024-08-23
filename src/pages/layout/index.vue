@@ -6,9 +6,9 @@ import search from './components/search.vue'
 import {
   DownOutlined,
 } from '@ant-design/icons-vue'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
 import { useSystemStore } from '@/store/system/index'
 import { removeToken } from '@/utils/system'
@@ -16,6 +16,7 @@ import { useUserStore } from '@/store/user'
 import { useScreenFull } from '@/hooks/useScreenFull'
 import { useMultipleKeydownEvent } from '@/hooks/useAddEvent'
 import { useTagStore } from '@/store/tag'
+import { useMenuStore } from '@/store/menu'
 
 const { collapsed, showTagsView, dark } = storeToRefs(useSystemStore())
 
@@ -28,6 +29,19 @@ const { cacheTags } = storeToRefs(useTagStore())
 const includesTag = computed(() => {
   return cacheTags.value.map(tag => tag.name)
 })
+
+const route = useRoute()
+const { getBreadcrumb } = useMenuStore()
+const breadList = ref<string[]>([])
+watch(
+  () => route.path,
+  () => {
+    breadList.value = getBreadcrumb(route.path)
+  },
+  {
+    immediate: true,
+  },
+)
 
 function goGithub() {
   window.open('https://github.com/bsuooo/ruoyi-antd')
@@ -108,9 +122,14 @@ function changeDark(event: MouseEvent) {
   <pageMenu />
   <div class="position-relative right-container flex h-100% flex-col">
     <div class="h-50px flex items-center justify-between">
-      <div class="navbar-left ml-10px">
+      <div class="navbar-left ml-10px flex items-center">
         <span v-if="collapsed" class="i-line-md:menu-fold-right cursor-pointer" @click="collapsed = !collapsed" />
         <span v-else class="i-line-md:menu-fold-left cursor-pointer" @click="collapsed = !collapsed" />
+        <a-breadcrumb class="ml-12px">
+          <a-breadcrumb-item v-for="breadcrumb in breadList" :key="breadcrumb">
+            {{ breadcrumb }}
+          </a-breadcrumb-item>
+        </a-breadcrumb>
       </div>
       <div class="navbar-right flex items-center">
         <span class="i-ic:round-search ml-15px font-size-22px cursor-pointer" @click="handleSearch" />
