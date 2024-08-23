@@ -1,54 +1,48 @@
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 
 export const useSystemStore = defineStore('system', () => {
-  const collapsed = ref(false)
-  const menuTheme = ref('dark')
-  const showRightLogo = ref(true)
-  const showTagsView = ref(true)
-  const showDynamicTitle = ref(false)
-  const dark = ref(false)
-  const currentRouteTitle = ref('首页')
-  const defaultTitle = ref('ruoyi-antd')
-
-  // todo 重构
+  const state = reactive({
+    collapsed: false,
+    menuTheme: 'dark',
+    showRightLogo: true,
+    showTagsView: true,
+    showDynamicTitle: false,
+    dark: false,
+    currentRouteTitle: '首页',
+    defaultTitle: 'ruoyi-antd',
+    primaryColor: '#1677ff',
+  })
 
   const menuBgColor = computed(() => {
-    return menuTheme.value === 'dark' ? '#001529' : '#fff'
+    return state.menuTheme === 'dark' ? '#001529' : '#fff'
   })
 
   const MenuFtColor = computed(() => {
-    return menuTheme.value === 'dark' ? '#fff' : '#001529'
+    return state.menuTheme === 'dark' ? '#fff' : '#001529'
   })
 
   const primaryColor = ref('#1677ff')
 
   const logoBgColor = computed(() => {
-    if (menuTheme.value === 'dark') {
+    if (state.menuTheme === 'dark') {
       return menuBgColor.value
     }
-    return dark.value ? '#141414' : menuBgColor.value
+    return state.dark ? '#141414' : menuBgColor.value
   })
 
   const logoFtColor = computed(() => {
-    if (menuTheme.value === 'dark') {
+    if (state.menuTheme === 'dark') {
       return MenuFtColor.value
     }
-    return dark.value ? '#fff' : MenuFtColor.value
+    return state.dark ? '#fff' : MenuFtColor.value
   })
   return {
-    collapsed,
-    menuTheme,
     menuBgColor,
     MenuFtColor,
-    showRightLogo,
-    showTagsView,
-    showDynamicTitle,
     primaryColor,
-    dark,
     logoBgColor,
     logoFtColor,
-    currentRouteTitle,
-    defaultTitle,
+    state,
   }
 })

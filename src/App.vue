@@ -4,14 +4,14 @@ import { effect } from 'vue'
 import { theme } from 'ant-design-vue'
 import { useSystemStore } from '@/store/system/index'
 
-const { showDynamicTitle, primaryColor, dark, currentRouteTitle, defaultTitle } = storeToRefs(useSystemStore())
+const { state, primaryColor } = storeToRefs(useSystemStore())
 
 effect(() => {
-  if (showDynamicTitle.value) {
-    document.title = `${defaultTitle?.value} - ${currentRouteTitle?.value}`
+  if (state.value.showDynamicTitle) {
+    document.title = `${state.value.defaultTitle} - ${state.value.currentRouteTitle}`
     return
   }
-  document.title = defaultTitle?.value
+  document.title = state.value.defaultTitle
 })
 </script>
 
@@ -19,7 +19,7 @@ effect(() => {
   <a-config-provider
     :theme="{
       token: { colorPrimary: primaryColor },
-      algorithm: dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+      algorithm: state.dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
     }"
   >
     <router-view />

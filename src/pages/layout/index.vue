@@ -18,10 +18,10 @@ import { useMultipleKeydownEvent } from '@/hooks/useAddEvent'
 import { useTagStore } from '@/store/tag'
 import { useMenuStore } from '@/store/menu'
 
-const { collapsed, showTagsView, dark } = storeToRefs(useSystemStore())
+const { state } = storeToRefs(useSystemStore())
 
 const leftWidth = computed(() => {
-  return collapsed.value ? '50px' : '220px'
+  return state.value.collapsed ? '50px' : '220px'
 })
 
 const { cacheTags } = storeToRefs(useTagStore())
@@ -81,8 +81,8 @@ const isAppearanceTransition
 
 function changeDark(event: MouseEvent) {
   if (!isAppearanceTransition) {
-    document.documentElement.className = dark.value ? 'light' : 'dark'
-    dark.value = !dark.value
+    document.documentElement.className = state.value.dark ? 'light' : 'dark'
+    state.value.dark = !state.value.dark
     return
   }
   const x = event.clientX
@@ -94,8 +94,8 @@ function changeDark(event: MouseEvent) {
 
   // @ts-expect-error: Transition API
   const transition = document.startViewTransition(() => {
-    document.documentElement.className = dark.value ? 'light' : 'dark'
-    dark.value = !dark.value
+    document.documentElement.className = state.value.dark ? 'light' : 'dark'
+    state.value.dark = !state.value.dark
   })
   transition.ready.then(() => {
     const clipPath = [
@@ -104,12 +104,12 @@ function changeDark(event: MouseEvent) {
     ]
     document.documentElement.animate(
       {
-        clipPath: dark.value ? [...clipPath].reverse() : clipPath,
+        clipPath: state.value.dark ? [...clipPath].reverse() : clipPath,
       },
       {
         duration: 300,
         easing: 'ease-in',
-        pseudoElement: dark.value
+        pseudoElement: state.value.dark
           ? '::view-transition-old(root)'
           : '::view-transition-new(root)',
       },
@@ -123,8 +123,8 @@ function changeDark(event: MouseEvent) {
   <div class="position-relative right-container flex h-100% flex-col">
     <div class="h-50px flex items-center justify-between">
       <div class="navbar-left ml-10px flex items-center">
-        <span v-if="collapsed" class="i-line-md:menu-fold-right cursor-pointer" @click="collapsed = !collapsed" />
-        <span v-else class="i-line-md:menu-fold-left cursor-pointer" @click="collapsed = !collapsed" />
+        <span v-if="state.collapsed" class="i-line-md:menu-fold-right cursor-pointer" @click="state.collapsed = !state.collapsed" />
+        <span v-else class="i-line-md:menu-fold-left cursor-pointer" @click="state.collapsed = !state.collapsed" />
         <a-breadcrumb class="ml-12px">
           <a-breadcrumb-item v-for="breadcrumb in breadList" :key="breadcrumb">
             {{ breadcrumb }}
@@ -137,7 +137,7 @@ function changeDark(event: MouseEvent) {
         <span class="i-solar:document-broken ml-15px font-size-22px cursor-pointer" @click="goDocument" />
         <span v-if="!isScreenfull" class="i-mingcute:fullscreen-2-line ml-15px font-size-22px cursor-pointer" @click="changeScreenfull" />
         <span v-else class="i-mingcute:fullscreen-exit-2-fill ml-15px font-size-22px cursor-pointer" @click="changeScreenfull" />
-        <span v-if="dark" class="i-ph:sun-bold ml-15px font-size-22px cursor-pointer" @click="changeDark" />
+        <span v-if="state.dark" class="i-ph:sun-bold ml-15px font-size-22px cursor-pointer" @click="changeDark" />
         <span v-else class="i-ph:moon-duotone ml-15px font-size-22px cursor-pointer" @click="changeDark" />
         <a-dropdown>
           <a class="ant-dropdown-link ml-15px mr-15px" @click.prevent>
@@ -155,7 +155,7 @@ function changeDark(event: MouseEvent) {
         </a-dropdown>
       </div>
     </div>
-    <tagList v-show="showTagsView" />
+    <tagList v-show="state.showTagsView" />
     <div class="main flex-1 bg-pure p-16px">
       <router-view v-slot="{ Component }">
         <keep-alive :include="includesTag">

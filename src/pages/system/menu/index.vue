@@ -1,15 +1,7 @@
 <script lang="ts" setup name="Menu">
 import { ref } from 'vue'
-// @ts-ignore
-import { useTagStore } from '@/store/tag'
 
 const count = ref(0)
-
-const { delTag, cacheTags } = useTagStore()
-
-function del() {
-  delTag('Menu')
-}
 </script>
 
 <template>
@@ -19,11 +11,6 @@ function del() {
         <a-button @click="count++">
           {{ count }}
         </a-button>
-
-        <a-button v-if="cacheTags.includes('Menu')" @click="del">
-          删除当前页面keep-alive
-        </a-button>
-        <span v-else>已删除!</span>
       </a-space>
     </a-card>
   </div>

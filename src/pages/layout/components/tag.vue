@@ -32,12 +32,12 @@ const tagBorder = computed(() => {
   return `${token.value.borderRadius}px`
 })
 
-const systemStore = storeToRefs(useSystemStore())
+const { state } = storeToRefs(useSystemStore())
 
 const { delTag } = useTagStore()
 
 const isDark = computed(() => {
-  return systemStore.dark.value
+  return state.value.dark
 })
 
 const activeTagBg = computed(() => {

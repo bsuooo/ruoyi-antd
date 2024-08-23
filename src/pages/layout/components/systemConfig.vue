@@ -5,10 +5,7 @@ import { theme } from 'ant-design-vue'
 import { useSystemStore } from '@/store/system/index'
 
 const {
-  menuTheme,
-  showRightLogo,
-  showTagsView,
-  showDynamicTitle,
+  state,
   primaryColor,
 } = storeToRefs(useSystemStore())
 
@@ -22,7 +19,7 @@ function showDraw() {
 const { token } = theme.useToken()
 
 function changeMenuTheme(theme: MenuTheme) {
-  menuTheme.value = theme
+  state.value.menuTheme = theme
 }
 
 function changePrimaryColor(e: any) {
@@ -56,13 +53,13 @@ function changePrimaryColor(e: any) {
         >
       </div>
       <div class="mt-3 flex items-center justify-between">
-        开启 Tags-View: <a-switch v-model:checked="showTagsView" />
+        开启 Tags-View: <a-switch v-model:checked="state.showTagsView" />
       </div>
       <div class="mt-3 flex items-center justify-between">
-        侧边栏 Logo: <a-switch v-model:checked="showRightLogo" />
+        侧边栏 Logo: <a-switch v-model:checked="state.showRightLogo" />
       </div>
       <div class="mt-3 flex items-center justify-between">
-        动态标题: <a-switch v-model:checked="showDynamicTitle" />
+        动态标题: <a-switch v-model:checked="state.showDynamicTitle" />
       </div>
       <div class="mt-3 flex items-center justify-between">
         主题颜色：<input

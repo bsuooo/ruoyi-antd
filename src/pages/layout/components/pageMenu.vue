@@ -6,16 +6,16 @@ import { useRoute, useRouter } from 'vue-router'
 import { useSystemStore } from '@/store/system/index'
 import { useMenuStore } from '@/store/menu'
 
-const { collapsed, menuTheme, logoBgColor, logoFtColor, showRightLogo }
+const { state, logoBgColor, logoFtColor }
   = storeToRefs(useSystemStore())
 const { menu } = storeToRefs(useMenuStore())
 
 const leftWidth = computed(() => {
-  return collapsed.value ? '50px' : '220px'
+  return state.value.collapsed ? '50px' : '220px'
 })
 
 const menuHeight = computed(() => {
-  return showRightLogo.value ? `calc(100vh - 50px)` : `100vh`
+  return state.value.showRightLogo ? `calc(100vh - 50px)` : `100vh`
 })
 
 const allMenu = computed(() => {
@@ -44,21 +44,21 @@ const selectedKeys = computed(() => {
 <template>
   <div class="position-fixed left-0">
     <div
-      v-show="showRightLogo"
+      v-show="state.showRightLogo"
       key="logo"
       class="h-50px flex flex-items-center flex-justify-center logo cursor-pointer"
       @click="router.push('/home')"
     >
       <img src="/src/assets/img/logo.png" alt="" width="32" height="32">
-      <span v-if="!collapsed">若依管理系统</span>
+      <span v-if="!state.collapsed">若依管理系统</span>
     </div>
     <a-menu
       id="dddddd"
       class="page-menu"
       mode="inline"
       :selected-keys="selectedKeys"
-      :inline-collapsed="collapsed"
-      :theme="menuTheme"
+      :inline-collapsed="state.collapsed"
+      :theme="state.menuTheme"
     >
       <menuItem v-for="m of allMenu" :key="m.path" :menu="m" />
     </a-menu>
