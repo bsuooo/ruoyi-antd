@@ -11,7 +11,7 @@ export const useTagStore = defineStore('tag', () => {
   const { getMenuByPath } = useMenuStore()
 
   const addTag = (path: string) => {
-    if (['/home', '/login'].includes(path)) {
+    if (['/home', '/login', '/redirect'].includes(path)) {
       return
     }
     const menuIndex = cacheTags.value.findIndex(it => it.path === path)
@@ -37,9 +37,77 @@ export const useTagStore = defineStore('tag', () => {
     }
   }
 
+  function afterClose(path: string) {
+    if (route.path !== path && !['/home', '/login', ...cacheTags.value.map(it => it.path)].includes(route.path)) {
+      router.replace({ path })
+    }
+  }
+
+  const refreshTag = (cb?: () => void) => {
+    router.replace({ path: '/redirect', query: { path: route.fullPath } })
+    if (cb) {
+      cb()
+    }
+  }
+
+  const delCurrentTag = (path?: string, cb?: () => void) => {
+    if (path) {
+      delTag(path)
+    }
+    if (cb) {
+      cb()
+    }
+  }
+
+  const delAllTag = (cb?: () => void) => {
+    cacheTags.value = []
+    router.replace({ path: '/home' })
+    if (cb) {
+      cb()
+    }
+  }
+
+  const delOtherTag = (path?: string, cb?: () => void) => {
+    if (path) {
+      cacheTags.value = cacheTags.value.filter(it => it.path === path)
+      afterClose(path)
+    }
+    if (cb) {
+      cb()
+    }
+  }
+
+  const delLeftTag = (path?: string, cb?: () => void) => {
+    if (path) {
+      const index = cacheTags.value.findIndex(it => it.path === path)
+      cacheTags.value = cacheTags.value.slice(index)
+      afterClose(path)
+    }
+    if (cb) {
+      cb()
+    }
+  }
+
+  const delRightTag = (path?: string, cb?: () => void) => {
+    if (path) {
+      const index = cacheTags.value.findIndex(it => it.path === path)
+      cacheTags.value = cacheTags.value.slice(0, index + 1)
+      afterClose(path)
+    }
+    if (cb) {
+      cb()
+    }
+  }
+
   return {
     cacheTags,
     addTag,
     delTag,
+    refreshTag,
+    delCurrentTag,
+    delAllTag,
+    delOtherTag,
+    delLeftTag,
+    delRightTag,
   }
 })

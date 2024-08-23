@@ -2,6 +2,7 @@
 import menuItem from './menuItem.vue'
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
+import { useRoute } from 'vue-router'
 import { useSystemStore } from '@/store/system/index'
 import { useMenuStore } from '@/store/menu'
 
@@ -32,6 +33,11 @@ const allMenu = computed(() => {
   ]
   return [...homeMenu, ...menu.value]
 })
+
+const route = useRoute()
+const selectedKeys = computed(() => {
+  return [route.path]
+})
 </script>
 
 <template>
@@ -48,6 +54,7 @@ const allMenu = computed(() => {
       id="dddddd"
       class="page-menu"
       mode="inline"
+      :selected-keys="selectedKeys"
       :inline-collapsed="collapsed"
       :theme="menuTheme"
     >

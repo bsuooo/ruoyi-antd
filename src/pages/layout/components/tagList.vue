@@ -15,19 +15,19 @@ const allTags = computed(() => {
 const tagMenuRef = ref()
 
 function handleClick(evt: MouseEvent, tag: Route) {
+  evt.preventDefault()
   const { clientX, clientY } = evt
-
   tagMenuRef.value.showRightMenu({
     x: clientX,
     y: clientY,
-    tag,
+    route: tag,
   })
 }
 </script>
 
 <template>
   <div class="h-36px border-t-1px border-b-1px border-l-0 border-r-0 base-border-color border-solid flex items-center">
-    <tag v-for="tag of allTags" :key="tag" :tag="tag" @click="handleClick($event, tag)" />
+    <tag v-for="tag of allTags" :key="tag" :tag="tag" @click.right="handleClick($event, tag)" />
     <tagMenu ref="tagMenuRef" />
   </div>
 </template>

@@ -5,6 +5,7 @@ import type { GetInfoResult, GetRoutersResult } from '@/pages/login/types/index'
 import login from '@/pages/login/index.vue'
 import home from '@/pages/home/index.vue'
 import layout from '@/pages/layout/index.vue'
+import redirect from '@/redirect'
 import 'nprogress/nprogress.css'
 import { getToken } from '@/utils/system'
 import { useUserStore } from '@/store/user'
@@ -17,6 +18,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: login,
+  },
+  {
+    path: '/redirect',
+    name: 'redirect',
+    component: redirect,
   },
   {
     path: '/',

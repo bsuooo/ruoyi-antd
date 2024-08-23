@@ -15,11 +15,18 @@ import { removeToken } from '@/utils/system'
 import { useUserStore } from '@/store/user'
 import { useScreenFull } from '@/hooks/useScreenFull'
 import { useMultipleKeydownEvent } from '@/hooks/useAddEvent'
+import { useTagStore } from '@/store/tag'
 
 const { collapsed, showTagsView, dark } = storeToRefs(useSystemStore())
 
 const leftWidth = computed(() => {
   return collapsed.value ? '50px' : '220px'
+})
+
+const { cacheTags } = storeToRefs(useTagStore())
+
+const includesTag = computed(() => {
+  return cacheTags.value.map(tag => tag.name)
 })
 
 function goGithub() {
@@ -132,7 +139,7 @@ function changeDark(event: MouseEvent) {
     <tagList v-show="showTagsView" />
     <div class="main flex-1 bg-pure p-16px">
       <router-view v-slot="{ Component }">
-        <keep-alive>
+        <keep-alive :include="includesTag">
           <component :is="Component" />
         </keep-alive>
       </router-view>
