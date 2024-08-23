@@ -2,7 +2,7 @@
 import menuItem from './menuItem.vue'
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useSystemStore } from '@/store/system/index'
 import { useMenuStore } from '@/store/menu'
 
@@ -35,6 +35,7 @@ const allMenu = computed(() => {
 })
 
 const route = useRoute()
+const router = useRouter()
 const selectedKeys = computed(() => {
   return [route.path]
 })
@@ -45,7 +46,8 @@ const selectedKeys = computed(() => {
     <div
       v-show="showRightLogo"
       key="logo"
-      class="h-50px flex flex-items-center flex-justify-center logo"
+      class="h-50px flex flex-items-center flex-justify-center logo cursor-pointer"
+      @click="router.push('/home')"
     >
       <img src="/src/assets/img/logo.png" alt="" width="32" height="32">
       <span v-if="!collapsed">若依管理系统</span>
