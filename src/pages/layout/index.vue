@@ -159,7 +159,9 @@ function changeDark(event: MouseEvent) {
     <div class="main flex-1 bg-pure p-16px">
       <router-view v-slot="{ Component }">
         <keep-alive :include="includesTag">
-          <component :is="Component" />
+          <Transition name="fade-transform" mode="out-in">
+            <component :is="Component" />
+          </Transition>
         </keep-alive>
       </router-view>
     </div>

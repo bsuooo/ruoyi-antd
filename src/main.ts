@@ -8,6 +8,7 @@ import 'virtual:uno.css'
 import '@/assets/style/custom.css'
 import 'virtual:svg-icons-register'
 import '@/assets/style/dark.css'
+import '@/assets/style/transition.css'
 import directives from '@/directives'
 import { setupI18n } from '@/locales'
 
