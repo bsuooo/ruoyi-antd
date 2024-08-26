@@ -11,7 +11,7 @@
 - 基础页面组装一个
 - dockerFile 自动化更新
 - 字典封装
-- unocss 的图标功能 引入 iconify ？ ✅
+- unocss 的图标功能 引入 iconify ？ ✅ ? jenkins 打包一直安装不了？
 - 补充单元测试
 - miniIO文件上传
 - 大文件分片上传，续传
