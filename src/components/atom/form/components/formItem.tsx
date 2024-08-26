@@ -16,7 +16,7 @@ function FormItemProps() {
       require: false,
     },
     rules: {
-      type: Array,
+      type: Array as PropType<any[]>,
       require: false,
     },
     span: {
