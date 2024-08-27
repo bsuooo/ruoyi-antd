@@ -46,11 +46,11 @@ export default defineConfig(async ({ mode }: ConfigEnv) => {
       port: Number(env.VITE_APP_PORT), // 为什么是string呢 ?
       open: true, // 运行后是否打开浏览器
       proxy: {
-        '/dev-api': {
-          target: 'http://vue.ruoyi.vip/prod-api',
-          changeOrigin: true,
-          rewrite: path => path.replace(/^\/dev-api/, ''),
-        },
+        // '/dev-api': {
+        //   target: 'http://vue.ruoyi.vip/prod-api',
+        //   changeOrigin: true,
+        //   rewrite: path => path.replace(/^\/dev-api/, ''),
+        // },
       },
     },
   }
