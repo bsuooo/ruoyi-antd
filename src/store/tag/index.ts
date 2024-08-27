@@ -11,7 +11,7 @@ export const useTagStore = defineStore('tag', () => {
   const { getMenuByPath } = useMenuStore()
 
   const addTag = (path: string) => {
-    if (['/home', '/login', '/redirect'].includes(path)) {
+    if (['/', '/home', '/login', '/redirect'].includes(path)) {
       return
     }
     const menuIndex = cacheTags.value.findIndex(it => it.path === path)
@@ -20,7 +20,8 @@ export const useTagStore = defineStore('tag', () => {
       return
     }
     const menu = getMenuByPath(path)
-
+    if (!menu)
+      return
     cacheTags.value.push(menu)
   }
 

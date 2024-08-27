@@ -43,7 +43,7 @@
     "typescript": "^5.0.2",
     "unocss": "^0.62.2",
     "unplugin-vue-components": "^0.25.2",
-    "vite": "^4.4.5",
+    "vite": "^5.4.2",
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-setup-extend-plus": "^0.1.0",
     "vitest": "^0.34.6",
