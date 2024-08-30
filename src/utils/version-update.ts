@@ -10,6 +10,7 @@ let current: string[]
 let timer: NodeJS.Timeout
 
 function compare(oldArr: string[], newArr: string[]) {
+  console.log(oldArr, newArr)
   const base = oldArr.length
   const arr = Array.from(new Set(oldArr.concat(newArr)))
   // 如果新旧length 一样无更新
