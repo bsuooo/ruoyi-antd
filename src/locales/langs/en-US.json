@@ -8,6 +8,12 @@
     "remember-me": "remember me",
     "logout": "Logout",
     "logout-confirm": "Are you sure you want to log out?",
-    "logout-confirm-ok": "OK"
+    "logout-confirm-ok": "OK",
+    "setting": "System setting",
+    "style": "Style setting",
+    "show-tags": "Show tags-View",
+    "slider-logo": "Show slider Logo",
+    "dynamic-title": "dynamic title",
+    "primary-color": "primary color"
   }
 }

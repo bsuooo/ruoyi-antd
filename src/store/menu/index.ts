@@ -3,7 +3,13 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import type { Route } from '@/pages/login/types'
-import { isUrl } from '@/utils/isUrl'
+import { isURL } from '@/utils/base'
+
+export interface SearchResult {
+  title: string
+  path: string
+  icon?: string
+}
 
 declare type Recordable<T = any> = Record<string, T>
 function dynamicImport(
@@ -33,6 +39,7 @@ function dynamicImport(
 }
 
 const relationCache: Record<string, string[]> = {}
+const searchCache: Record<string, SearchResult[]> = {}
 
 export const useMenuStore = defineStore('menu', () => {
   const menu = ref<Route[]>([])
@@ -54,7 +61,7 @@ export const useMenuStore = defineStore('menu', () => {
     r.forEach((route) => {
       const path = route.path
       route.path
-      = path.charAt(0) === '/' || isUrl(path) ? route.path : `/${route.path}`
+      = path.charAt(0) === '/' || isURL(path) ? route.path : `/${route.path}`
       if (parentRoute) {
         route.path = `${parentRoute.path}${route.path}`
         relationMap[route.path] = parentRoute.path
@@ -96,6 +103,54 @@ export const useMenuStore = defineStore('menu', () => {
     return result
   }
 
+  function getMenuByKeyword(keyword: string) {
+    const result = Object.keys(menuMap).filter((path) => {
+      const menu = menuMap[path]
+      const { title } = menu?.meta || {}
+      if (!title) {
+        return false
+      }
+      return !!title.includes(keyword)
+    })
+    return result
+  }
+
+  function getFullTitleByPath(path: string) {
+    let title = getMenuByPath(path).meta.title
+    let parentPath = relationMap[path]
+    while (parentPath) {
+      const parentTitle = getMenuByPath(parentPath).meta.title
+      title = `${parentTitle} / ${title}`
+      parentPath = relationMap[parentPath]
+    }
+    return title
+  }
+
+  function searchMenu(keyword: string) {
+    if (keyword === '') {
+      return []
+    }
+    if (searchCache[keyword]) {
+      return searchCache[keyword]
+    }
+    const menuList = getMenuByKeyword(keyword)
+    if (!menuList.length) {
+      return []
+    }
+    const result = menuList.map((path) => {
+      const title = getFullTitleByPath(path)
+      const icon = getMenuByPath(path).meta.icon
+      return {
+        path,
+        title,
+        icon,
+      }
+    })
+
+    searchCache[keyword] = result
+    return result
+  }
+
   return {
     menu,
     formatRoutes,
@@ -104,5 +159,7 @@ export const useMenuStore = defineStore('menu', () => {
     getMenuByPath,
     getBreadcrumb,
     relationCache,
+    relationMap,
+    searchMenu,
   }
 })

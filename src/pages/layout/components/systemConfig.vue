@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { theme } from 'ant-design-vue'
 import { useSystemStore } from '@/store/system/index'
+import { $t } from '@/locales'
 
 const {
   state,
@@ -29,17 +30,17 @@ function changePrimaryColor(e: any) {
 
 <template>
   <a-menu-item>
-    <a href="javascript:;" @click="showDraw">系统设置</a>
+    <a href="javascript:;" @click="showDraw">{{ $t('system.setting') }}</a>
   </a-menu-item>
   <a-drawer
     v-model:open="open"
-    title="系统风格设置"
+    :title="$t('system.style')"
     placement="right"
     width="250px"
     class="bg-base"
   >
     <div class="bg-base">
-      <div>主题风格设置：</div>
+      <div>{{ $t('system.style') }}：</div>
       <div class="mt-3">
         <img
           src="@/assets/img/darkMenu.svg"
@@ -53,16 +54,16 @@ function changePrimaryColor(e: any) {
         >
       </div>
       <div class="mt-3 flex items-center justify-between">
-        开启 Tags-View: <a-switch v-model:checked="state.showTagsView" />
+        {{ $t('system.show-tags') }}: <a-switch v-model:checked="state.showTagsView" />
       </div>
       <div class="mt-3 flex items-center justify-between">
-        侧边栏 Logo: <a-switch v-model:checked="state.showRightLogo" />
+        {{ $t('system.slider-logo') }}: <a-switch v-model:checked="state.showRightLogo" />
       </div>
       <div class="mt-3 flex items-center justify-between">
-        动态标题: <a-switch v-model:checked="state.showDynamicTitle" />
+        {{ $t('dynamic-title') }}: <a-switch v-model:checked="state.showDynamicTitle" />
       </div>
       <div class="mt-3 flex items-center justify-between">
-        主题颜色：<input
+        {{ $t('primary-color') }}<input
           type="color"
           :value="primaryColor"
           @input="changePrimaryColor"

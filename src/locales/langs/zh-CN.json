@@ -8,6 +8,12 @@
     "remember-me": "记住密码",
     "logout": "退出登录",
     "logout-confirm": "确定要退出登录吗？",
-    "logout-confirm-ok": "确定"
+    "logout-confirm-ok": "确定",
+    "setting": "系统设置",
+    "style": "主题风格",
+    "show-tags": "开启 Tags-View",
+    "slider-logo": "侧边栏 Logo",
+    "dynamic-title": "动态标题",
+    "primary-color": "主题颜色"
   }
 }

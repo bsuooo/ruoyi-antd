@@ -23,6 +23,7 @@ export default antfu({
     }],
     'vue/no-template-shadow': 'off',
     'no-console': 'off',
+    'ts/no-unsafe-function-type': 'off',
     'import-x/order': [
       'error',
       {

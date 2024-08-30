@@ -6,7 +6,7 @@ import search from './components/search.vue'
 import {
   DownOutlined,
 } from '@ant-design/icons-vue'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, unref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
@@ -17,6 +17,7 @@ import { useScreenFull } from '@/hooks/useScreenFull'
 import { useMultipleKeydownEvent } from '@/hooks/useAddEvent'
 import { useTagStore } from '@/store/tag'
 import { useMenuStore } from '@/store/menu'
+import { $t, i18n, loadLocaleMessages } from '@/locales/index'
 
 const { state } = storeToRefs(useSystemStore())
 
@@ -62,6 +63,16 @@ useMultipleKeydownEvent(document, ['Meta', 'k'], () => {
 })
 
 const { changeScreenfull, isScreenfull } = useScreenFull()
+
+async function handleLocal() {
+  const lang = unref(i18n.global.locale)
+  if (lang === 'zh-CN') {
+    await loadLocaleMessages('en-US')
+  }
+  else {
+    await loadLocaleMessages('zh-CN')
+  }
+}
 
 const router = useRouter()
 const { userInfo, roles, permissions } = storeToRefs(useUserStore())
@@ -133,6 +144,7 @@ function changeDark(event: MouseEvent) {
       </div>
       <div class="navbar-right flex items-center">
         <span class="i-ic:round-search ml-15px font-size-22px cursor-pointer" @click="handleSearch" />
+        <span class="i-ph:translate-fill ml-15px font-size-22px cursor-pointer" @click="handleLocal" />
         <span class="i-ri:github-fill ml-15px font-size-22px cursor-pointer" @click="goGithub" />
         <span class="i-solar:document-broken ml-15px font-size-22px cursor-pointer" @click="goDocument" />
         <span v-if="!isScreenfull" class="i-mingcute:fullscreen-2-line ml-15px font-size-22px cursor-pointer" @click="changeScreenfull" />
@@ -141,14 +153,14 @@ function changeDark(event: MouseEvent) {
         <span v-else class="i-ph:moon-duotone ml-15px font-size-22px cursor-pointer" @click="changeDark" />
         <a-dropdown>
           <a class="ant-dropdown-link ml-15px mr-15px" @click.prevent>
-            管理员
+            {{ userInfo?.nickName }}
             <DownOutlined />
           </a>
           <template #overlay>
             <a-menu>
               <systemConfig />
               <a-menu-item>
-                <a href="javascript:;" @click="logout">退出登录</a>
+                <a href="javascript:;" @click="logout">{{ $t('system.logout') }}</a>
               </a-menu-item>
             </a-menu>
           </template>

@@ -4,7 +4,7 @@ import { computed, reactive, ref } from 'vue'
 export const useSystemStore = defineStore('system', () => {
   const state = reactive({
     collapsed: false,
-    menuTheme: 'dark',
+    menuTheme: 'light',
     showRightLogo: true,
     showTagsView: true,
     showDynamicTitle: false,
