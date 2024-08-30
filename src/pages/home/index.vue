@@ -3,7 +3,5 @@
 </script>
 
 <template>
-  <baseCard class="h-full w-full">
-    vue3 + ts + vite + unocss
-  </baseCard>
+  <baseCard class="h-full w-full" />
 </template>
