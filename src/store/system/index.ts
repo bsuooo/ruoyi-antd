@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 export const useSystemStore = defineStore('system', () => {
   const state = reactive({
@@ -14,6 +15,15 @@ export const useSystemStore = defineStore('system', () => {
     defaultTitle: 'ruoyi-antd',
     primaryColor: '#1677ff',
   })
+
+  const route = useRoute()
+
+  watch(
+    () => route.path,
+    () => {
+      state.currentRouteTitle = route.meta.title as string
+    },
+  )
 
   const menuBgColor = computed(() => {
     return state.menuTheme === 'dark' ? '#001529' : '#fff'

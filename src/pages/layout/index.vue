@@ -188,7 +188,7 @@ function changeDark(event: MouseEvent) {
     </div>
     <search v-model:visible="searchVisible" />
     <systemConfig />
-    <a-button :icon="h(SettingOutlined)" type="primary" class="fixed right-0 top-50%" @click="state.showSystemDrawer = true" />
+    <a-button :icon="h(SettingOutlined)" type="primary" class="fixed right-0 top-30%" @click="state.showSystemDrawer = true" />
   </div>
 </template>
 

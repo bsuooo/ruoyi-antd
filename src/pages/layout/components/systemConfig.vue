@@ -51,10 +51,10 @@ function changePrimaryColor(e: any) {
         {{ $t('system.slider-logo') }}: <a-switch v-model:checked="state.showRightLogo" />
       </div>
       <div class="mt-3 flex items-center justify-between">
-        {{ $t('dynamic-title') }}: <a-switch v-model:checked="state.showDynamicTitle" />
+        {{ $t('system.dynamic-title') }}: <a-switch v-model:checked="state.showDynamicTitle" />
       </div>
       <div class="mt-3 flex items-center justify-between">
-        {{ $t('primary-color') }}<input
+        {{ $t('system.primary-color') }}<input
           type="color"
           :value="primaryColor"
           @input="changePrimaryColor"
