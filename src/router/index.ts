@@ -1,6 +1,10 @@
 import * as VueRouter from 'vue-router'
 import NProcess from 'nprogress'
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
+import { notification } from 'ant-design-vue'
+import { SmileOutlined } from '@ant-design/icons-vue'
+import { h } from 'vue'
 import type { GetInfoResult, GetRoutersResult } from '@/pages/login/types/index'
 import login from '@/pages/login/index.vue'
 import home from '@/pages/home/index.vue'
@@ -27,6 +31,7 @@ const routes = [
   {
     path: '/',
     name: 'layout',
+    redirect: '/home',
     component: layout,
     children: [
       {
@@ -43,10 +48,13 @@ export const router = VueRouter.createRouter({
   history: VueRouter.createWebHashHistory(),
 })
 
-router.beforeEach((to, _, next) => {
+router.beforeEach((to, from, next) => {
   const { roles, userInfo, permissions } = storeToRefs(useUserStore())
   const menuStore = useMenuStore()
-  const { addTag } = useTagStore()
+  const { addTag, delAllTag } = useTagStore()
+  if (from.path === '/login') {
+    delAllTag()
+  }
   NProcess.start()
   if (to.name !== 'login') {
     if (!getToken()) {
@@ -74,11 +82,25 @@ router.beforeEach((to, _, next) => {
         })
     }
     else {
-      const { path } = to
-      if (path) {
-        addTag(path)
+      const router = useRouter()
+      const { path, name } = to
+      if (name && router.hasRoute(name)) {
+        if (path) {
+          addTag(path)
+        }
+        next()
       }
-      next()
+      else {
+        notification.warning({
+          message: '系统提示',
+          description:
+            '访问的页面不存在，请检查路由配置是否正确，或刷新后再试',
+          duration: 60,
+          key: '__noRoute',
+          icon: () => h(SmileOutlined, { style: 'color: #108ee9' }),
+        })
+        NProcess.done()
+      }
     }
   }
   else {

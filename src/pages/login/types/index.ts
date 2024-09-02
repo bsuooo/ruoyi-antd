@@ -28,6 +28,7 @@ export interface RouteMeta {
 }
 export interface Route {
   alwaysShow?: boolean
+  isIframe?: string
   component: string
   hidden: boolean
   name: string

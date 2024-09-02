@@ -6,7 +6,7 @@ import type { SearchResult } from '@/store/menu/index'
 import { useAddEvent } from '@/hooks/useAddEvent'
 import { useThemeRadius, useThemeToken } from '@/hooks/useToken'
 import { useMenuStore } from '@/store/menu/index'
-import { isURL } from '@/utils/base'
+import { isUrl } from '@/utils/base'
 import { useSystemStore } from '@/store/system'
 
 interface Props {
@@ -59,7 +59,7 @@ const router = useRouter()
 function go(path: string) {
   show.value = false
   searchValue.value = ''
-  if (isURL(path)) {
+  if (isUrl(path)) {
     window.open(path)
   }
   else {

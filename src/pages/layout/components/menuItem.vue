@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import type { Route } from '@/pages/login/types'
 import { useSystemStore } from '@/store/system'
-import { isURL } from '@/utils/base'
+import { isUrl } from '@/utils/base'
 
 interface MenuProps {
   menu: any
@@ -16,7 +16,7 @@ const { logoFtColor } = storeToRefs(useSystemStore())
 const router = useRouter()
 function go(menu: Route) {
   const { path } = menu
-  if (isURL(path)) {
+  if (isUrl(path)) {
     window.open(path)
   }
   else {

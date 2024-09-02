@@ -3,7 +3,7 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import type { Route } from '@/pages/login/types'
-import { isURL } from '@/utils/base'
+import { isUrl } from '@/utils/base'
 
 export interface SearchResult {
   title: string
@@ -61,7 +61,7 @@ export const useMenuStore = defineStore('menu', () => {
     r.forEach((route) => {
       const path = route.path
       route.path
-      = path.charAt(0) === '/' || isURL(path) ? route.path : `/${route.path}`
+      = path.charAt(0) === '/' || isUrl(path) ? route.path : `/${route.path}`
       if (parentRoute) {
         route.path = `${parentRoute.path}${route.path}`
         relationMap[route.path] = parentRoute.path
@@ -70,11 +70,12 @@ export const useMenuStore = defineStore('menu', () => {
         formatRoutes(route.children, route)
       }
       menuMap[route.path] = route
-      if (!route.alwaysShow) {
+      const component = dynamicImport(dynamicViewsModules, route.component)
+      if (!route.alwaysShow && component) {
         const r = {
           path: route.path,
           name: route.name,
-          component: dynamicImport(dynamicViewsModules, route.component),
+          component,
           meta: route.meta,
         }
         router.addRoute('layout', r as unknown as RouteRecordRaw)
