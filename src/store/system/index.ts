@@ -8,6 +8,7 @@ export const useSystemStore = defineStore('system', () => {
     showRightLogo: true,
     showTagsView: true,
     showDynamicTitle: false,
+    showSystemDrawer: false,
     dark: false,
     currentRouteTitle: '首页',
     defaultTitle: 'ruoyi-antd',

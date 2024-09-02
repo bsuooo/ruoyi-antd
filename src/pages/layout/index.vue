@@ -5,8 +5,9 @@ import systemConfig from './components/systemConfig.vue'
 import search from './components/search.vue'
 import {
   DownOutlined,
+  SettingOutlined,
 } from '@ant-design/icons-vue'
-import { computed, ref, unref, watch } from 'vue'
+import { computed, h, ref, unref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
@@ -28,7 +29,13 @@ const leftWidth = computed(() => {
 const { cacheTags } = storeToRefs(useTagStore())
 
 const includesTag = computed(() => {
-  return cacheTags.value.map(tag => tag.name)
+  const list: string[] = []
+  cacheTags.value.forEach((tag) => {
+    if (!tag.meta.noCache) {
+      list.push(tag.name)
+    }
+  })
+  return list
 })
 
 const route = useRoute()
@@ -158,7 +165,9 @@ function changeDark(event: MouseEvent) {
           </a>
           <template #overlay>
             <a-menu>
-              <systemConfig />
+              <a-menu-item>
+                <a href="javascript:;" @click="state.showSystemDrawer = true">{{ $t('system.setting') }}</a>
+              </a-menu-item>
               <a-menu-item>
                 <a href="javascript:;" @click="logout">{{ $t('system.logout') }}</a>
               </a-menu-item>
@@ -178,6 +187,8 @@ function changeDark(event: MouseEvent) {
       </router-view>
     </div>
     <search v-model:visible="searchVisible" />
+    <systemConfig />
+    <a-button :icon="h(SettingOutlined)" type="primary" class="fixed right-0 top-50%" @click="state.showSystemDrawer = true" />
   </div>
 </template>
 

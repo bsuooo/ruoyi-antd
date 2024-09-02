@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { theme } from 'ant-design-vue'
 import { useSystemStore } from '@/store/system/index'
@@ -11,11 +10,6 @@ const {
 } = storeToRefs(useSystemStore())
 
 type MenuTheme = 'dark' | 'light'
-
-const open = ref<boolean>(false)
-function showDraw() {
-  open.value = true
-}
 
 const { token } = theme.useToken()
 
@@ -29,11 +23,8 @@ function changePrimaryColor(e: any) {
 </script>
 
 <template>
-  <a-menu-item>
-    <a href="javascript:;" @click="showDraw">{{ $t('system.setting') }}</a>
-  </a-menu-item>
   <a-drawer
-    v-model:open="open"
+    v-model:open="state.showSystemDrawer"
     :title="$t('system.style')"
     placement="right"
     width="250px"

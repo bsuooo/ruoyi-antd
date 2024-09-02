@@ -48,13 +48,10 @@ export const router = VueRouter.createRouter({
   history: VueRouter.createWebHashHistory(),
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _, next) => {
   const { roles, userInfo, permissions } = storeToRefs(useUserStore())
   const menuStore = useMenuStore()
-  const { addTag, delAllTag } = useTagStore()
-  if (from.path === '/login') {
-    delAllTag()
-  }
+  const { addTag } = useTagStore()
   NProcess.start()
   if (to.name !== 'login') {
     if (!getToken()) {
