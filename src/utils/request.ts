@@ -7,7 +7,7 @@ import errorCode from '@/utils/ruoyi/errorCode'
 
 const service = axios.create({
   // baseURL: import.meta.env.VITE_APP_BASE_API,
-  baseURL: 'http://vue.ruoyi.vip/prod-api',
+  baseURL: 'https://vue.ruoyi.vip/prod-api',
   timeout: 60000,
   headers: { 'Content-Type': 'application/json;charset=utf-8' },
 })
