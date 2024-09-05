@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import tag from './tag.vue'
-import tagMenu from './tagMenu'
+import tag from './Tag.vue'
+import tagMenu from './TagMenu'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 import type { Route } from '@/pages/login/types'

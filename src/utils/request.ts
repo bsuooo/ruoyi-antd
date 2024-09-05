@@ -49,7 +49,7 @@ service.interceptors.response.use(
       return response.data
     }
     if (code === 401) {
-      message.error('登录状态已过期，请重新登录。')
+      message.error({ content: '登录状态已过期，请重新登录。', key: '_401Key' })
       return Promise.reject(new Error('无效的会话，或者会话已过期，请重新登录。'))
     }
     else if (code !== 200) {

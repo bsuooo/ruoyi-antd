@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import menuItem from './menuItem.vue'
+import menuItem from './MenuItem.vue'
 import { computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'

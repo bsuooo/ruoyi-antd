@@ -1,8 +1,8 @@
 <script setup lang="ts" name="layout">
-import tagList from './components/tagList.vue'
-import pageMenu from './components/pageMenu.vue'
-import systemConfig from './components/systemConfig.vue'
-import search from './components/search.vue'
+import tagList from './components/TagList.vue'
+import pageMenu from './components/PageMenu.vue'
+import systemConfig from './components/SystemConfig.vue'
+import search from './components/Search.vue'
 import {
   DownOutlined,
   SettingOutlined,
