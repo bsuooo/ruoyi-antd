@@ -166,6 +166,9 @@ function changeDark(event: MouseEvent) {
           <template #overlay>
             <a-menu>
               <a-menu-item>
+                <a href="javascript:;" @click="router.push('/user-info')">{{ $t('system.user-info') }}</a>
+              </a-menu-item>
+              <a-menu-item>
                 <a href="javascript:;" @click="state.showSystemDrawer = true">{{ $t('system.setting') }}</a>
               </a-menu-item>
               <a-menu-item>

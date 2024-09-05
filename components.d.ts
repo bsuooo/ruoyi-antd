@@ -28,9 +28,16 @@ declare module 'vue' {
     ASwitch: typeof import('ant-design-vue/es')['Switch']
     BaseCard: typeof import('./src/components/atom/baseCard/index.vue')['default']
     Form: typeof import('./src/components/atom/form/components/form.vue')['default']
+    Layout: typeof import('./src/components/layout/index.vue')['default']
+    MenuItem: typeof import('./src/components/layout/components/MenuItem.vue')['default']
+    PageMenu: typeof import('./src/components/layout/components/PageMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Search: typeof import('./src/components/layout/components/Search.vue')['default']
     SvgIcon: typeof import('./src/components/atom/svgIcon/index.vue')['default']
+    SystemConfig: typeof import('./src/components/layout/components/SystemConfig.vue')['default']
     Table: typeof import('./src/components/atom/table/index.vue')['default']
+    Tag: typeof import('./src/components/layout/components/Tag.vue')['default']
+    TagList: typeof import('./src/components/layout/components/TagList.vue')['default']
   }
 }
