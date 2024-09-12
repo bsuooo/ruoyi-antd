@@ -74,23 +74,25 @@ onClickOutside(searchContainerRef, () => {
 </script>
 
 <template>
-  <div v-if="show" class="search-mask h-100vh w-100vw fixed left-0 top-0 z-100 flex items-center justify-center">
-    <div ref="searchContainerRef" class="h-60vh w-640px bg-#F6F7F7 dark:bg-#1C1E22 search-border flex flex-col z-2000">
-      <div class="w-full h-50px base-border-color border-0 border-b border-solid">
-        <a-input ref="searchInputRef" v-model:value="searchValue" class="wh-full" :bordered="false" placeholder="搜索导航菜单">
-          <template #prefix>
-            <span class="i-ic:round-search cursor-pointer color-base" />
-          </template>
-        </a-input>
-      </div>
-      <div class="flex-1 p-4 overflow-y-auto">
-        <div v-for="item of searchResult" :key="item.path" class="search-item search-border p-4 bg-base cursor-pointer" @click="go(item.path)">
-          <svgIcon class="mr-8px" width="15px" height="15px" :name="item.icon || 'form'" :color="state.dark ? '#fff' : '#000'" />
-          {{ item.title }}
+  <Transition>
+    <div v-if="show" class="search-mask h-100vh w-100vw fixed left-0 top-0 z-100 flex items-center justify-center">
+      <div ref="searchContainerRef" class="h-60vh w-640px bg-#F6F7F7 dark:bg-#1C1E22 search-border flex flex-col z-2000">
+        <div class="w-full h-50px base-border-color border-0 border-b border-solid">
+          <a-input ref="searchInputRef" v-model:value="searchValue" class="wh-full" :bordered="false" placeholder="搜索导航菜单">
+            <template #prefix>
+              <span class="i-ic:round-search cursor-pointer color-base" />
+            </template>
+          </a-input>
+        </div>
+        <div class="flex-1 p-4 overflow-y-auto">
+          <div v-for="item of searchResult" :key="item.path" class="search-item search-border p-4 bg-base cursor-pointer" @click="go(item.path)">
+            <svgIcon class="mr-8px" width="15px" height="15px" :name="item.icon || 'form'" :color="state.dark ? '#fff' : '#000'" />
+            {{ item.title }}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </Transition>
 </template>
 
 <style lang="less">
@@ -108,5 +110,17 @@ onClickOutside(searchContainerRef, () => {
 
 .search-item + .search-item {
   margin-top: 16px;
+}
+</style>
+
+<style>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
